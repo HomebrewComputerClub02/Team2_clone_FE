@@ -1,16 +1,18 @@
-import {createBrowserRouter} from "react-router-dom";
-import Entrance from "./pages/Entrance";
-import Home from "./pages/Home";
-
+import { createBrowserRouter } from 'react-router-dom';
+import Root from './pages/Root';
+import React from 'react';
+import Homebrewtify from './pages/Homebrewtify';
 const router = createBrowserRouter([
   {
-    path: "/hombrewtify.com",
-    element: <Entrance />
+    path: '/',
+    element: <Root />,
+    children: [
+      {
+        path: '',
+        element: <Homebrewtify />,
+      },
+    ],
   },
-  {
-    path: "/open.hombrewtify.com", 
-    element: <Home />
-  }
-])
+]);
 
 export default router;
