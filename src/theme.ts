@@ -23,6 +23,7 @@ export const theme: DefaultTheme = {
   },
   font: {
     light: '400',
-    bold: '700',
+    regular: '700',
+    bold: '900',
   },
 };
