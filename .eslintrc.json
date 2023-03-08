@@ -16,7 +16,8 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "ignorePatterns": ["dist/", "node_modules/"],
   "rules": {
     "indent": "off",
     "linebreak-style": ["warn", "windows"],
