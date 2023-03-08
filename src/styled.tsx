@@ -11,6 +11,11 @@ export const Test400 = styled.p`
 `;
 
 export const Test700 = styled.p`
-font-weight: ${(props) => props.theme.font.bold};
-background: ${(props) => props.theme.icons.whiteColor}}
+  font-weight: ${(props) => props.theme.font.regular};
+  background: ${(props) => props.theme.icons.whiteColor};
+`;
+
+export const Test900 = styled.p`
+  font-weight: ${(props) => props.theme.font.bold};
+  background: ${(props) => props.theme.icons.whiteColor};
 `;
