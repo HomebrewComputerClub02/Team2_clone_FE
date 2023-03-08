@@ -1,13 +1,10 @@
-import { Blue, Test400, Test700 } from '../styled';
 import React from 'react';
-
+import TopBar from '../components/molecules/TopBar';
 function Homebrewtify() {
-  console.log('hombrew');
   return (
-    <Blue>
-      <Test400>asdf;ljasld;fj</Test400>
-      <Test700>asdfasdfasdfasdfa</Test700>
-    </Blue>
+    <>
+      <TopBar />
+    </>
   );
 }
 
