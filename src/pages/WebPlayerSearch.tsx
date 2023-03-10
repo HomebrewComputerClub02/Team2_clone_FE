@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MainView = styled.div`
-  background-color: green;
+  background-color: skyblue;
   display: flex;
   flex-direction: column;
   grid-area: main-view;
@@ -12,8 +12,8 @@ const MainView = styled.div`
   width: 100%;
 `;
 
-const WebPlayerHome = () => {
+const WebPlayerSearch = () => {
   return <MainView></MainView>;
 };
 
-export default WebPlayerHome;
+export default WebPlayerSearch;
