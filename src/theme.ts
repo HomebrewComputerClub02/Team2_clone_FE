@@ -12,6 +12,7 @@ export const theme: DefaultTheme = {
   },
   text: {
     greyColor: '#B3B3B3',
+    greenColor: '#1CD760',
   },
   icons: {
     greyColor: '#A7A7A7',
