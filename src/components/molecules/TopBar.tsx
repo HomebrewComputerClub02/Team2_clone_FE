@@ -17,10 +17,10 @@ function TopBar() {
       <Link to="/">
         <LinkForTopBar>다운로드하기</LinkForTopBar>
       </Link>
-      <Link to="/">
+      <Link to="/signup">
         <LinkForTopBar>가입하기</LinkForTopBar>
       </Link>
-      <Link to="/">
+      <Link to="/login">
         <LinkForTopBar>로그인하기</LinkForTopBar>
       </Link>
     </TopBarContainer>

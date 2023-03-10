@@ -11,11 +11,9 @@ import {
 function HomeFooter() {
   return (
     <HomeFooterContainer>
-      <HomeFooterColumn>
-        <Link to="/">
-          <Logo>Homebrewtify</Logo>
-        </Link>
-      </HomeFooterColumn>
+      <Link to="/" style={{ fontSize: '1.1rem', marginRight: '3vw' }}>
+        <Logo>Homebrewtify</Logo>
+      </Link>
       <HomeFooterColumn>
         <HomeFooterColumnTitle>회사</HomeFooterColumnTitle>
         <Link to="/">
