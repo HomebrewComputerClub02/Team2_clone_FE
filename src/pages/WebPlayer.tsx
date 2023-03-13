@@ -18,7 +18,7 @@ const Layout = styled.div`
     'nav-bar top-bar'
     'nav-bar main-view'
     'now-playing-bar now-playing-bar';
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 240px 1fr;
   grid-template-rows: 64px 593px 64px;
   height: 100%;
   min-height: 100%;
