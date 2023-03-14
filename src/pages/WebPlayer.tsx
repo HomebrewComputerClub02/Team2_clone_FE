@@ -18,24 +18,23 @@ const Layout = styled.div`
     'nav-bar top-bar'
     'nav-bar main-view'
     'now-playing-bar now-playing-bar';
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: auto 6fr;
   grid-template-rows: 64px 593px 64px;
   height: 100%;
   min-height: 100%;
   position: relative;
   width: 100%;
+  overflow: hidden; // 스크롤바 삭제.
 `;
 
 const WebPlayer = () => {
   return (
-    <div>
-      <Layout>
-        <TopBar />
-        <NavBar />
-        <Outlet />
-        <NowPlayingBar />
-      </Layout>
-    </div>
+    <Layout>
+      <TopBar />
+      <NavBar />
+      <Outlet />
+      <NowPlayingBar />
+    </Layout>
   );
 };
 

@@ -11,6 +11,7 @@ const Nav = styled.div`
   z-index: 4;
   padding-top: 24px;
   padding-left: 24px;
+  padding-right: 24px;
 `;
 const NavUl = styled.ul`
   display: flex;
