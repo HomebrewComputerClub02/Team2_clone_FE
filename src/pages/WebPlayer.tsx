@@ -18,8 +18,8 @@ const Layout = styled.div`
     'nav-bar top-bar'
     'nav-bar main-view'
     'now-playing-bar now-playing-bar';
-  grid-template-columns: auto 6fr;
-  grid-template-rows: 64px 593px 64px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 593px auto;
   height: 100%;
   min-height: 100%;
   position: relative;

@@ -5,6 +5,7 @@ const TopDiv = styled.div`
   grid-area: top-bar;
   min-width: 0;
   background-color: blue;
+  height: 64px;
 `;
 
 const TopBar = () => {
