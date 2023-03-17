@@ -1,167 +1,100 @@
-import styled from 'styled-components';
 import { IoBeerOutline } from 'react-icons/io5';
-
-//topbar
-export const TopBarContainer = styled.div`
-  display: flex;
-  background: ${(props) => props.theme.background.blackColor};
-  height: 10vh;
-  width: 100vw;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-export const LinkForTopBar = styled.h1`
-  font-weight: ${(props) => props.theme.font.regular};
-  color: white;
-  font-size: 1rem;
-  &:hover {
-    color: ${(props) => props.theme.text.greenColor};
-  }
-`;
-
-//hombrewtify.tsx
-export const HomeBackgroundLoggedIn = styled.div`
-  background: url('images/Home.png') no-repeat center;
-  height: 70vh;
-  width: 100vw;
-  background-size: 100vw 70vh;
-`;
-
-export const HomeBackgroundLoggedOut = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10vw;
-  background: ${(props) => props.theme.background.pinkColor};
-  height: 70vh;
-  width: 100vw;
-  background-size: 100vw 70vh;
-`;
-
-export const BackgroundTitle = styled.h1`
-  color: black;
-  font-size: 3.6rem;
-  font-weight: ${(props) => props.theme.font.Bold};
-`;
-
-export const BackgroundP = styled.p`
-  color: balck;
-  font-size: 1.8rem;
-  font-weight: ${(props) => props.theme.font.light};
-`;
-
-export const HomeFooterContainer = styled.div`
-  background: ${(props) => props.theme.background.blackColor};
-  display: flex;
-  justify-content: space-around;
-  align-items: start;
-  padding: 10vw;
-  width: 100vw;
-  height: 40vh;
-`;
-
-export const BackgroundButton = styled.div`
-  margin: 1vw;
-  padding-left: 5vw;
-  color: white;
-  width: 15vw;
-  height: 6vh;
-  background: ${(props) => props.theme.background.blackColor};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid ${(props) => props.theme.border.greyColor};
-  border-radius: 10px;
-  color: white;
-  background-image: url('images/appleLogo.png');
-  background-repeat: no-repeat;
-  background-position: -10 1;
-  background-size: 8vh 8vh;
-`;
-
-export const BackgroundButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const BackgroundSmallP = styled.p`
-  font-weight: ${(props) => props.theme.font.light}
-  font-size: 0.7rem;
-  color: black;
-`;
-
-//home footer
-export const HomeFooterColumn = styled.div`
-  background: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
-`;
-
-export const HomeFooterColumnTitle = styled.h1`
-  color: ${(props) => props.theme.text.greyColor};
-  font-weight: ${(props) => props.theme.font.bold};
-  font-size: 1rem;
-`;
-
-export const LinkForFooter = styled.h1`
-  font-size: 1rem;
-  color: white;
-  font-weight: ${(props) => props.theme.font.light};
-  &:hover {
-    color: ${(props) => props.theme.text.greenColor};
-  }
-`;
+import styled from 'styled-components';
 
 //for all
-export const Logo = styled.h1`
-  font-size: 2rem;
+export const Logo = styled.div`
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 400px) {
+    margin: 10px;
+    transform: scale(0.6);
+  }
+`;
+
+export const LogoH1 = styled.h1`
+  font-size: 40px;
   color: white;
   font-weight: ${(props) => props.theme.font.bold};
-  display: flex;
-  justify-content: center;
 `;
 
-//signup
-export const SignUpTopContainer = styled.div`
-  margin: auto;
-  width: 40vw;
-  height: 30vh;
-  background: inherit;
+export const GoogleButton = styled.button`
+  background: url('images/GoogleLogo.png') no-repeat;
+  background-size: 30px;
+  background-position: left 70px center;
+  color: ${(props) => props.theme.border.lightGrey};
+  border: 1px solid ${(props) => props.theme.border.lightGrey};
+  width: 100%;
+  height: 5vh;
+  border-radius: 400px;
+  font-size: 18px;
+  font-weight: ${(porps) => porps.theme.font.regular};
+  margin: 10px 0;
+  &:hover {
+    transform: scale(1.05); /* increase the button size by 10% */
+  }
+  &:focus {
+    border: 2px solid black;
+  }
+  @media screen and (max-width: 450px) {
+    background-position: left 10% center;
+    font-size: 12px;
+    background-size: 20px;
+  }
+`;
+export const LabelInputDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  color: ${(props) => props.theme.text.blackColor};
+  justify-content: center;
+  align-items: start;
+  margin: 15px 0;
 `;
 
-export const SignUpTopH1 = styled.h1`
+export const H1 = styled.h1`
+  text-align: center;
+  margin: 20px auto;
   font-weight: ${(props) => props.theme.font.bold};
-  font-size: 2rem;
   display: block;
   width: 100%;
+  @media screen and (min-width: 800px) {
+    font-size: 25px;
+  }
+  @media screen and (min-width: 400px) and (max-width: 799px) {
+    font-size: 18px;
+  }
+  @media (max-width: 399px) {
+    font-size: 14px;
+  }
 `;
 
-export const SignUpGoogleButton = styled.div`
-  background: url('images/GoogleLogo.png') no-repeat 10% 40%;
-  background-size: 3vh;
+export const H3 = styled.h3`
+  text-align: center;
+  margin: 30px;
   font-weight: ${(props) => props.theme.font.bold};
-  font-size: 1.2rem;
-  width: 100%;
-  color: ${(props) => props.theme.text.greyColor};
-  border: 1px solid ${(props) => props.theme.border.greyColor};
-  border-radius: 30px;
-  padding: 1vh 5vw;
-  &:hover {
-    cursor: pointer;
+  @media screen and (min-width: 800px) {
+    font-size: 18px;
   }
-  display: flex;
-  justify-content: center;
+  @media screen and (min-width: 400px) and (max-width: 799px) {
+    font-size: 16px;
+  }
+  @media (max-width: 399px) {
+    font-size: 12px;
+  }
+`;
+
+export const H5 = styled.h5`
+  font-size: 14px;
+  text-align: center;
+  margin: 30px;
+  font-weight: ${(props) => props.theme.font.bold};
+  @media screen and (min-width: 800px) {
+    font-size: 14px;
+  }
+  @media screen and (min-width: 400px) and (max-width: 799px) {
+    font-size: 12px;
+  }
+  @media (max-width: 399px) {
+    font-size: 10px;
+  }
 `;

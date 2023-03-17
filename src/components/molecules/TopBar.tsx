@@ -1,29 +1,77 @@
 import React from 'react';
+import { IoBeerOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { LinkForTopBar, TopBarContainer, Logo } from '../../styled';
+import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
+import { screenSize } from '../../stores/atom';
+import { Logo, LogoH1 } from '../../styled';
+import { TiThMenu } from 'react-icons/ti';
+const Div = styled.div`
+  display: flex;
+  background: ${(props) => props.theme.background.blackColor};
+  height: 10vh;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+`;
 
+const A = styled.h1`
+  font-weight: ${(props) => props.theme.font.regular};
+  color: white;
+  &:hover {
+    color: ${(props) => props.theme.text.greenColor};
+  }
+  @media screen and (max-width: 1000px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 1001px) {
+    font-size: 18px;
+  }
+`;
+
+const Menu = styled.div`
+  display: block;
+  width: 10vw;
+`;
 function TopBar() {
-  return (
-    <TopBarContainer>
+  const screen = useRecoilValue(screenSize);
+  return screen == 'desktop' ? (
+    <Div>
       <Link to="/">
-        <Logo>Homebrewtify</Logo>
+        <Logo>
+          <IoBeerOutline size={50} color="white" />
+          <LogoH1>Homebrewtify</LogoH1>
+        </Logo>
       </Link>
       <Link to="/">
-        <LinkForTopBar>프리미엄</LinkForTopBar>
+        <A>프리미엄</A>
       </Link>
       <Link to="/">
-        <LinkForTopBar>지원</LinkForTopBar>
+        <A>지원</A>
       </Link>
       <Link to="/">
-        <LinkForTopBar>다운로드하기</LinkForTopBar>
+        <A>다운로드하기</A>
       </Link>
       <Link to="/signup">
-        <LinkForTopBar>가입하기</LinkForTopBar>
+        <A>가입하기</A>
       </Link>
       <Link to="/login">
-        <LinkForTopBar>로그인하기</LinkForTopBar>
+        <A>로그인하기</A>
       </Link>
-    </TopBarContainer>
+    </Div>
+  ) : (
+    <Div>
+      <Link to="/">
+        <Logo>
+          <IoBeerOutline size={50} color="white" />
+          <LogoH1>Homebrewtify</LogoH1>
+        </Logo>
+      </Link>
+      <Menu>
+        <TiThMenu size={'100%'} color="white" />
+      </Menu>
+    </Div>
   );
 }
 

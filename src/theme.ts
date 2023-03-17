@@ -19,8 +19,8 @@ export const theme: DefaultTheme = {
     whiteColor: '#FFFFFF',
   },
   border: {
-    darkGrey: '#2A2A2A',
-    ligthGrey: '#9C9C9C',
+    darkGrey: '#111111',
+    lightGrey: '#999999',
   },
   font: {
     light: '400',
