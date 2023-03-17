@@ -94,7 +94,17 @@ function SignUp() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: '',
+      email2: '',
+      pw: '',
+      name: '',
+      year: null,
+      month: null,
+      day: null,
+    },
+  });
   const onSubmit = (data: any) => {
     console.log(data);
   };
@@ -125,9 +135,7 @@ function SignUp() {
               required: 'You need to enter your email.',
             })}
           />
-          {errors?.email ? (
-            <p className="error">{String(errors?.email?.message)}</p>
-          ) : null}
+          <p>{errors?.email?.message}</p>
         </LabelInputDiv>
         <LabelInputDiv>
           <Label htmlFor="email2">Confirm your email</Label>
@@ -173,7 +181,7 @@ function SignUp() {
             style={{ display: 'flex', flexDirection: 'column', width: '30%' }}
           >
             <p>Month</p>
-            <Select {...register('month')} placeholder="red">
+            <Select {...register('month')} placeholder="MM">
               {[
                 'January',
                 'February',
