@@ -142,6 +142,9 @@ const MainView = styled.div`
   position: relative;
   width: 100%;
   padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     width: 15px;
     background: rgba(233, 7, 53, 0.4); // 차이 두기 위해 색깔 추가
@@ -156,12 +159,9 @@ const H2 = styled.h2`
   font-size: 24px;
   font-weight: 700;
   color: white;
-  padding-left: 32px;
   margin-bottom: 20px;
 `;
 const SearchDiv = styled.div`
-  padding-left: 32px;
-  padding-right: 32px;
   min-width: 400px;
   display: grid;
   grid-auto-rows: auto;
