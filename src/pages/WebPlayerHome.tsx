@@ -272,7 +272,7 @@ const WebPlayerHome = () => {
           <GridDiv>
             {data.body
               .filter((item, idx) => {
-                if (idx <= calcWidth()) return item;
+                if (idx < calcWidth()) return item;
               })
               .map((item, idx) => (
                 <ItemDiv key={idx}>
