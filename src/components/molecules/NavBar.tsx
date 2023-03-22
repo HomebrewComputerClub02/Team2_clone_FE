@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
@@ -30,6 +31,13 @@ const NavA = styled.a`
   display: flex;
   gap: 16px;
   align-items: center;
+`;
+const NavLink = styled(Link)`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: white;
+  text-decoration: none;
 `;
 const NavSpan = styled.span`
   font-weight: 700;
@@ -68,22 +76,22 @@ const NavBar = () => {
     <Nav>
       <NavUl>
         <NavLi>
-          <NavA>
+          <NavLink to="">
             <HomeIcon />
             <NavSpan>홈</NavSpan>
-          </NavA>
+          </NavLink>
         </NavLi>
         <NavLi>
-          <NavA>
+          <NavLink to="search">
             <SearchIcon />
             <NavSpan>검색하기</NavSpan>
-          </NavA>
+          </NavLink>
         </NavLi>
         <NavLi>
-          <NavA>
+          <NavLink to="">
             <LibraryMusicIcon />
             <NavSpan>내 라이브러리</NavSpan>
-          </NavA>
+          </NavLink>
         </NavLi>
       </NavUl>
       <NavDiv>
@@ -94,10 +102,10 @@ const NavBar = () => {
           </NavButton>
         </NavInnerDiv>
         <NavInnerDiv>
-          <NavA>
+          <NavLink to="">
             <FavoriteIcon />
             <NavSpan>좋아요 표시한 곡</NavSpan>
-          </NavA>
+          </NavLink>
         </NavInnerDiv>
       </NavDiv>
       <HrDiv>
