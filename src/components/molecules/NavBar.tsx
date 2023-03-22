@@ -8,6 +8,7 @@ import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Nav = styled.div`
+  min-width: 170px;
   background-color: #000;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,7 @@
 import { debounce } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
 const GridData = [
   {
@@ -112,7 +113,7 @@ const GridData = [
 ];
 
 const MainView = styled.div`
-  background-color: gray;
+  background-color: #121212;
   display: flex;
   flex-direction: column;
   grid-area: main-view;
@@ -120,6 +121,7 @@ const MainView = styled.div`
   overflow: hidden;
   position: relative;
   width: 100%;
+  min-width: 520px;
   padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;
@@ -187,13 +189,62 @@ const GridDiv = styled.div`
   }
 `;
 const ItemDiv = styled.div`
-  background-color: black;
+  background-color: #181818;
   padding: 16px;
   position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #282828;
+    > div > div {
+      opacity: 1;
+      bottom: 8px;
+      transition: all 0.3s ease;
+    }
+  }
 `;
 const ImgDiv = styled.div`
   margin-bottom: 16px;
   position: relative;
+`;
+const ButtonDiv = styled.div`
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  z-index: 3;
+  right: 8px;
+  bottom: 0px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  &:hover {
+    > button {
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+  }
+`;
+
+const PlayButton = styled.button`
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: relative;
+  padding: 0px;
+  cursor: pointer;
+`;
+const BlackDiv = styled.div`
+  width: 0;
+  height: 0;
+  border-bottom: 9.6px solid transparent;
+  border-top: 9.6px solid transparent;
+  border-left: 15.3px solid black;
+  border-right: 15.3px solid transparent;
+  position: absolute;
+  top: 50%;
+  left: 69.6%;
+  transform: translate(-50%, -50%);
 `;
 const Img = styled.img`
   width: 100%;
@@ -268,7 +319,6 @@ const WebPlayerHome = () => {
             </HDiv>
             <ShowAllA>모두 표시</ShowAllA>
           </TitleDiv>
-          <p>{calcWidth()}</p>
           <GridDiv>
             {data.body
               .filter((item, idx) => {
@@ -278,6 +328,17 @@ const WebPlayerHome = () => {
                 <ItemDiv key={idx}>
                   <ImgDiv>
                     <Img src={item.imgSrc} />
+                    <ButtonDiv>
+                      <PlayButton>
+                        <PlayCircleIcon
+                          sx={{
+                            color: '#12d760',
+                            fontSize: '48px',
+                          }}
+                        />
+                        <BlackDiv />
+                      </PlayButton>
+                    </ButtonDiv>
                   </ImgDiv>
                   <TextDiv>
                     <NameP>{item.title}</NameP>
