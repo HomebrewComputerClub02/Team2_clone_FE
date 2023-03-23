@@ -133,7 +133,7 @@ const SearchData = [
 ];
 
 const MainView = styled.div`
-  background-color: skyblue;
+  background-color: #121212;
   display: flex;
   flex-direction: column;
   grid-area: main-view;
