@@ -267,7 +267,8 @@ const NameP = styled.p`
   padding-block-end: 4px;
 `;
 const SubNameA = styled.a`
-  height: 30px;
+  line-height: 1.2;
+  height: 35px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -278,6 +279,9 @@ const SubNameA = styled.a`
   word-break: break-all; // 영어는 필요.
   padding-block-start: 4px;
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const WebPlayerHome = () => {
@@ -342,7 +346,7 @@ const WebPlayerHome = () => {
                   </ImgDiv>
                   <TextDiv>
                     <NameP>{item.title}</NameP>
-                    <SubNameA href="artist">{item.artist}</SubNameA>
+                    <SubNameA href="open/artist">{item.artist}</SubNameA>
                   </TextDiv>
                 </ItemDiv>
               ))}
