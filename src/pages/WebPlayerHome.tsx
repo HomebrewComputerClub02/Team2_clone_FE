@@ -1,7 +1,5 @@
-import { debounce } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import Section from '../components/molecules/Section';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 
@@ -14,7 +12,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67616d00001e02580ac3ad7dfc81e509171120',
         title: 'BORN PINK',
         titleLink: '/album',
-        artist: 'BLACKPINK',
+        artist: ['BLACKPINK'],
         artistLink: '/artist',
       },
       {
@@ -22,7 +20,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67616d00001e021a8e7c237aca188a1e314af3',
         title: '4TH WALL',
         titleLink: '/album',
-        artist: 'Ruel',
+        artist: ['Ruel'],
         artistLink: '/artist',
       },
       {
@@ -30,7 +28,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67616d00001e029d28fd01859073a3ae6ea209',
         title: "NewJeans 1st EP 'New Jeans'",
         titleLink: '/album',
-        artist: 'NewJeans',
+        artist: ['NewJeans'],
         artistLink: '/artist',
       },
       {
@@ -38,7 +36,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f00000002f36e4a301bc00c44b2c944d9',
         title: 'Korean OST Instrumentals',
         titleLink: '/album',
-        artist: "Enjoy your favourite K-drama's OST instrumentals.",
+        artist: ["Enjoy your favourite K-drama's OST instrumentals."],
         artistLink: '/artist',
       },
       {
@@ -46,7 +44,15 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
         title: 'IU 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67616d00001e02278d6cf14513bd97cb580fe7',
+        title: 'VIBE (feat. Jimin of BTS)',
+        titleLink: '/album',
+        artist: ['태양', '지민'],
         artistLink: '/artist',
       },
       {
@@ -54,7 +60,7 @@ const GridData = [
           'https://i.scdn.co/image/ab6761610000f1785704a64f34fe29ff73ab56bb',
         title: '방탄소년단',
         titleLink: '/album',
-        artist: '아티스트',
+        artist: ['아티스트'],
         artistLink: '/artist',
       },
     ],
@@ -67,7 +73,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/6HvZYsbFfjnjFrWF950C9d/en',
         title: 'NewJeans 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
       {
@@ -75,7 +81,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
         title: 'IU 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
       {
@@ -83,7 +89,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/6VuMaDnrHyPL1p4EHjYLi7/en',
         title: 'Charlie Puth 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
       {
@@ -91,7 +97,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/6zn0ihyAApAYV51zpXxdEp/en',
         title: '10cm 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
       {
@@ -99,7 +105,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/2SY6OktZyMLdOnscX3DCyS/en',
         title: 'JANNABI 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
       {
@@ -107,7 +113,7 @@ const GridData = [
           'https://seeded-session-images.scdn.co/v1/img/artist/4SpbR6yFEvexJuaBpgAU5p/en',
         title: 'LE SSERAFIM 라디오',
         titleLink: '/album',
-        artist: '만든 사람: Spotify',
+        artist: ['만든 사람: Spotify'],
         artistLink: '/artist',
       },
     ],
@@ -122,7 +128,7 @@ interface Item {
   imgSrc: string;
   title: string;
   titleLink: string;
-  artist: string;
+  artist: Array<string>;
   artistLink: string;
 }
 

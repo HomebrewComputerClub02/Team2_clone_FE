@@ -12,7 +12,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000024ab18459b1f5a2cd93e4f30d',
         title: '인기가요 Hot Now',
         titleLink: '/album',
-        artist: '지금 국내에서 가장 핫한 노래들을 만나보세요! (커버: STAYC)',
+        artist: ['지금 국내에서 가장 핫한 노래들을 만나보세요! (커버: STAYC)'],
         artistLink: '/artist',
       },
       {
@@ -20,7 +20,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f00000002eacc0304574188d548dac45d',
         title: 'Hot Hits Korea',
         titleLink: '/album',
-        artist: '국내외 가장 핫한 노래들을 만나보세요! (커버: NewJeans)',
+        artist: ['국내외 가장 핫한 노래들을 만나보세요! (커버: NewJeans)'],
         artistLink: '/artist',
       },
       {
@@ -28,8 +28,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000028b2ac825c72d3f35415f4a36',
         title: 'New Music K-Pop',
         titleLink: '/album',
-        artist:
+        artist: [
           '신곡 배달! The freshest K-Pop releases are here! (Cover: SUNMI & BEO) (신선한 국내 최신곡들을 플레이리스트로 만나보세요.)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -37,8 +38,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000024ed913b8f81b5e33f28637fc',
         title: 'New Music Friday Korea',
         titleLink: '/album',
-        artist:
+        artist: [
           '매주 업데이트 되는 국내외 신곡들을 만나보세요. (커버: Sabrina Carpenter)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -46,8 +48,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f0000000240f680ff52fde89d5d69a611',
         title: '바이럴 히트 코리아',
         titleLink: '/album',
-        artist:
+        artist: [
           '국내 인터넷, SNS, 스포티파이에서 유행하고 있는 노래들을 만나보세요! (커버: imase)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -55,7 +58,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000023c6109e85e58100cf3215ffd',
         title: '국내 가요 Rising',
         titleLink: '/album',
-        artist: '화제가 되고 있는 국내 곡들을 만나보세요! (커버: 니콜)',
+        artist: ['화제가 되고 있는 국내 곡들을 만나보세요! (커버: 니콜)'],
         artistLink: '/artist',
       },
     ],
@@ -68,8 +71,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000025d96c142647d9469390091d0',
         title: 'WOR K  OUT',
         titleLink: '/album',
-        artist:
+        artist: [
           'Workout to K-Pop? Count me in! (Cover: CAMO(카모)) (신나는 케이팝 댄스 음악과 함께 운동을 즐겨보세요!)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -77,8 +81,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f0000000262a9874085e91a05440a1cee',
         title: 'Dalkom Cafe',
         titleLink: '/album',
-        artist:
+        artist: [
           "Chill Korean tunes that's perfect with your latte or americano. (카페와 어울리는 편안한 음악들을 감상하세요.)",
+        ],
         artistLink: '/artist',
       },
       {
@@ -86,8 +91,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000026937248c9ef8c9f96dd2a110',
         title: 'd r e a m l i k e ㄲ ㅜ ㅁ',
         titleLink: '/album',
-        artist:
+        artist: [
           'Enjoy mysterious and dreamy music as if walking in a dream. (꿈 속을 거닐듯 신비롭고 몽환적인 음악들을 즐겨보세요.)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -95,8 +101,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f000000026c0a95b092a0a2aef14ba4a2',
         title: 'K-Pop Acoustic',
         titleLink: '/album',
-        artist:
+        artist: [
           'Chillout to the coolest Korean acoustic tunes. (Cover: J.YUNA(제이유나)) (감미롭고 부드러운 한국 어쿠스틱 음악과 함께하세요.)',
+        ],
         artistLink: '/artist',
       },
       {
@@ -104,7 +111,7 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f00000002b1670ed57eb296260b0dccd5',
         title: '4:00 AM GROOVE',
         titleLink: '/album',
-        artist: '새벽 감성. Issa Vibe.',
+        artist: ['새벽 감성. Issa Vibe.'],
         artistLink: '/artist',
       },
       {
@@ -112,8 +119,9 @@ const GridData = [
           'https://i.scdn.co/image/ab67706f00000002b2376c0ecee1d21c1ed19acb',
         title: '포근 편안 폭신',
         titleLink: '/album',
-        artist:
+        artist: [
           '이불 안 속처럼 포근하고 편안한 음악들과 함께 폭신한 기분을 만끽하세요.',
+        ],
         artistLink: '/artist',
       },
     ],
@@ -128,7 +136,7 @@ interface Item {
   imgSrc: string;
   title: string;
   titleLink: string;
-  artist: string;
+  artist: Array<string>;
   artistLink: string;
 }
 

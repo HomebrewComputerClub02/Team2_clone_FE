@@ -11,7 +11,7 @@ interface Item {
   imgSrc: string;
   title: string;
   titleLink: string;
-  artist: string;
+  artist: Array<string>;
   artistLink: string;
 }
 
@@ -159,7 +159,15 @@ const NameP = styled.p`
   margin-block-end: 4px;
   padding-block-end: 4px;
 `;
-const SubNameA = styled.a`
+const SubNameDiv = styled.div`
+  display: flex;
+  align-items: baseline;
+  color: #b3b3b3;
+  font-size: 14px;
+  line-height: 1.2;
+`;
+
+const SubNameLink = styled(Link)`
   line-height: 1.2;
   height: 35px;
   display: -webkit-box;
@@ -213,7 +221,16 @@ const Section = ({ data, dataNum, show }: Props) => {
               </ImgDiv>
               <TextDiv>
                 <NameP>{item.title}</NameP>
-                <SubNameA href="open/artist">{item.artist}</SubNameA>
+                <SubNameDiv>
+                  {item.artist.map((value, index) => (
+                    <>
+                      {index > 0 ? <pre>, </pre> : null}
+                      <SubNameLink to="artist" key={index}>
+                        {value}
+                      </SubNameLink>
+                    </>
+                  ))}
+                </SubNameDiv>
               </TextDiv>
             </ItemDiv>
           ))}
