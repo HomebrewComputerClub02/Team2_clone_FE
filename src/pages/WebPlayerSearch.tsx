@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MainViewFooter from '../components/molecules/MainViewFooter';
 
 const SearchData = [
   {
@@ -150,6 +151,7 @@ const MainView = styled.div`
   padding-top: 32px;
   padding-left: 32px;
   padding-right: 32px;
+  padding-bottom: 32px;
   box-sizing: border-box;
   &::-webkit-scrollbar {
     width: 15px;
@@ -168,6 +170,7 @@ const H2 = styled.h2`
   margin-bottom: 20px;
 `;
 const SearchDiv = styled.div`
+  margin-bottom: 20px;
   min-width: 400px;
   display: grid;
   grid-auto-rows: auto;
@@ -240,6 +243,7 @@ const WebPlayerSearch = () => {
           </NavLink>
         ))}
       </SearchDiv>
+      <MainViewFooter />
     </MainView>
   );
 };

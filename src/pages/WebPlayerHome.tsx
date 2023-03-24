@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import Section from '../components/molecules/Section';
+import MainViewFooter from '../components/molecules/MainViewFooter';
 
 const GridData = [
   {
@@ -138,6 +139,7 @@ const MainView = styled.div`
   padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;
+  padding-bottom: 32px;
   box-sizing: border-box; // box크기에 padding영역과 border영역을 포함해준다.
   gap: 24px;
   overflow-y: auto;
@@ -186,6 +188,7 @@ const WebPlayerHome = () => {
       {GridData.map((data: Data, index: number) => (
         <Section data={data} dataNum={dataNum} show={true} key={index} />
       ))}
+      <MainViewFooter />
     </MainView>
   );
 };

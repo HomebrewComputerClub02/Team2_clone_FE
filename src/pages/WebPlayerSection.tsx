@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import MainViewFooter from '../components/molecules/MainViewFooter';
 import Section from '../components/molecules/Section';
 
 const GridData = {
@@ -85,6 +86,7 @@ const MainView = styled.div`
   padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;
+  padding-bottom: 32px;
   box-sizing: border-box; // box크기에 padding영역과 border영역을 포함해준다.
   gap: 24px;
   overflow-y: auto;
@@ -102,6 +104,7 @@ const WebPlayerSection = () => {
   return (
     <MainView>
       <Section data={GridData} dataNum={10} show={false} />
+      <MainViewFooter />
     </MainView>
   );
 };
