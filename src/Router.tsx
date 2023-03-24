@@ -9,6 +9,8 @@ import WebPlayerAlbum from './pages/WebPlayerAlbum';
 import WebPlayerArtist from './pages/WebPlayerArtist';
 import WebPlayerGenre from './pages/WebPlayerGenre';
 import WebPlayerSection from './pages/WebPlayerSection';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
             element: <WebPlayerSection />,
           },
         ],
+      },
+      {
+        path: 'login',
+        element: <LogIn />,
+      },
+      {
+        path: 'signup',
+        element: <SignUp />,
       },
     ],
   },

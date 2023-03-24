@@ -19,8 +19,6 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -46,6 +44,13 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+*{
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color:inherit;
 }`;
 
 export default GlobalStyle;

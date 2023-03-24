@@ -12,14 +12,15 @@ export const theme: DefaultTheme = {
   },
   text: {
     greyColor: '#B3B3B3',
+    greenColor: '#1CD760',
   },
   icons: {
     greyColor: '#A7A7A7',
     whiteColor: '#FFFFFF',
   },
   border: {
-    darkGrey: '#2A2A2A',
-    ligthGrey: '#9C9C9C',
+    darkGrey: '#111111',
+    lightGrey: '#999999',
   },
   font: {
     light: '400',

@@ -13,6 +13,7 @@ declare module 'styled-components' {
     };
     text: {
       greyColor: string;
+      greenColor: string;
     };
     icons: {
       greyColor: string;
