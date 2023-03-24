@@ -28,11 +28,6 @@ const NavUl = styled.ul`
 const NavLi = styled.li`
   color: white;
 `;
-const NavA = styled.a`
-  display: flex;
-  gap: 16px;
-  align-items: center;
-`;
 const NavLink = styled(Link)`
   display: flex;
   gap: 16px;

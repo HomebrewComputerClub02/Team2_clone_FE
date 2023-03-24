@@ -8,6 +8,7 @@ import WebPlayerHome from './pages/WebPlayerHome';
 import WebPlayerAlbum from './pages/WebPlayerAlbum';
 import WebPlayerArtist from './pages/WebPlayerArtist';
 import WebPlayerGenre from './pages/WebPlayerGenre';
+import WebPlayerSection from './pages/WebPlayerSection';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
           {
             path: 'genre',
             element: <WebPlayerGenre />,
+          },
+          {
+            path: 'section',
+            element: <WebPlayerSection />,
           },
         ],
       },
