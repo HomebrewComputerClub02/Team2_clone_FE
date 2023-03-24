@@ -1,5 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import MainViewFooter from '../components/molecules/MainViewFooter';
 
 const SearchData = [
   {
@@ -132,8 +134,13 @@ const SearchData = [
   },
 ];
 
+interface Nav {
+  to: string;
+  key: number;
+  bgColor: string;
+}
 const MainView = styled.div`
-  background-color: skyblue;
+  background-color: #121212;
   display: flex;
   flex-direction: column;
   grid-area: main-view;
@@ -142,6 +149,10 @@ const MainView = styled.div`
   position: relative;
   width: 100%;
   padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 32px;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     width: 15px;
     background: rgba(233, 7, 53, 0.4); // 차이 두기 위해 색깔 추가
@@ -156,12 +167,10 @@ const H2 = styled.h2`
   font-size: 24px;
   font-weight: 700;
   color: white;
-  padding-left: 32px;
   margin-bottom: 20px;
 `;
 const SearchDiv = styled.div`
-  padding-left: 32px;
-  padding-right: 32px;
+  margin-bottom: 20px;
   min-width: 400px;
   display: grid;
   grid-auto-rows: auto;
@@ -186,13 +195,14 @@ const SearchDiv = styled.div`
   }
 `;
 
-const A = styled.a`
+const NavLink = styled(Link)<Nav>`
   position: relative;
   border: none;
   border-radius: 8px;
   aspect-ratio: 1/1;
   overflow: hidden;
   box-sizing: border-box;
+  background-color: ${(props) => props.bgColor};
 `;
 const ItemDiv = styled.div`
   box-sizing: border-box;
@@ -220,21 +230,20 @@ const ItemSpan = styled.span`
   z-index: 1;
 `;
 const WebPlayerSearch = () => {
-  const MainRef = useRef<HTMLDivElement>(null);
-  console.log(MainRef.current?.offsetWidth || 0);
   return (
     <MainView>
       <H2>모두 둘러보기</H2>
-      <SearchDiv ref={MainRef}>
+      <SearchDiv>
         {SearchData.map((data, index) => (
-          <A key={index} style={{ backgroundColor: data.bgColor }}>
+          <NavLink to="../genre" key={index} bgColor={data.bgColor}>
             <ItemDiv>
               <ItemSpan>{data.title}</ItemSpan>
               <ItemImg src={data.imgSrc} />
             </ItemDiv>
-          </A>
+          </NavLink>
         ))}
       </SearchDiv>
+      <MainViewFooter />
     </MainView>
   );
 };

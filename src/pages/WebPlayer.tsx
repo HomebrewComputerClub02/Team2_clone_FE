@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/molecules/NavBar';
-import TopBar from '../components/molecules/TopBar';
 import NowPlayingBar from '../components/molecules/NowPlayingBar';
 import { Outlet } from 'react-router-dom';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 
 const P = styled.p`
   text-align: center;
@@ -30,7 +30,7 @@ const Layout = styled.div`
 const WebPlayer = () => {
   return (
     <Layout>
-      <TopBar />
+      <WebPlayerTopBar />
       <NavBar />
       <Outlet />
       <NowPlayingBar />
