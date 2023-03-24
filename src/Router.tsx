@@ -11,6 +11,10 @@ import WebPlayerGenre from './pages/WebPlayerGenre';
 import WebPlayerSection from './pages/WebPlayerSection';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import WebPlayerCollection from './pages/WebPlayerCollection';
+import WebPlayerAlbums from './pages/WebPlayerAlbums';
+import WebPlayerPlaylists from './pages/WebPlayerPlaylists';
+import WebPlayerArtists from './pages/WebPlayerArtists';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +52,24 @@ const router = createBrowserRouter([
           {
             path: 'section',
             element: <WebPlayerSection />,
+          },
+          {
+            path: 'collection',
+            element: <WebPlayerCollection />,
+            children: [
+              {
+                path: 'playlists',
+                element: <WebPlayerPlaylists />,
+              },
+              {
+                path: 'albums',
+                element: <WebPlayerAlbums />,
+              },
+              {
+                path: 'artists',
+                element: <WebPlayerArtists />,
+              },
+            ],
           },
         ],
       },
