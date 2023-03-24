@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import WebPlayerSection from '../components/molecules/WebPlayerSection';
+import Section from '../components/molecules/Section';
 
 const GridData = [
   {
@@ -200,7 +199,7 @@ const WebPlayerGenre = () => {
     <MainView>
       <H1>가요</H1>
       {GridData.map((data: Data, index: number) => (
-        <WebPlayerSection data={data} dataNum={dataNum} key={index} />
+        <Section data={data} dataNum={dataNum} show={true} key={index} />
       ))}
     </MainView>
   );

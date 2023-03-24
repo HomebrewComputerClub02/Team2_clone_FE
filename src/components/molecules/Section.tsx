@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { Link } from 'react-router-dom';
 
 interface Data {
   title: string;
@@ -17,8 +18,9 @@ interface Item {
 interface Props {
   data: Data;
   dataNum: number;
+  show: boolean;
 }
-const Section = styled.section`
+const WrapperSection = styled.section`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
@@ -31,21 +33,31 @@ const HDiv = styled.div`
   line-height: normal;
   flex-grow: 1;
 `;
-const H2 = styled.h2`
+const TitleLink = styled(Link)`
   font-size: 24px;
   color: white;
   font-weight: 700;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
-const TitleA = styled.a``;
-const ShowAllA = styled.a`
+const TitleP = styled.p`
+  font-size: 24px;
+  color: #b3b3b3;
+  font-weight: 700;
+`;
+const ShowAllLink = styled(Link)`
   color: #b3b3b3;
   font-size: 14px;
   font-weight: 700;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 const GridDiv = styled.div`
-  grid-auto-rows: 0; //새로 생기는 행의 높이를 0으로 설정.
   grid-template-rows: 1fr;
-  overflow: hidden;
   min-width: 185px;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -129,6 +141,7 @@ const BlackDiv = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 4px;
 `;
 const TextDiv = styled.div`
   display: flex;
@@ -164,16 +177,18 @@ const SubNameA = styled.a`
   }
 `;
 
-const WebPlayerSection = ({ data, dataNum }: Props) => {
+const Section = ({ data, dataNum, show }: Props) => {
   return (
-    <Section>
+    <WrapperSection>
       <TitleDiv>
         <HDiv>
-          <H2>
-            <TitleA>{data.title}</TitleA>
-          </H2>
+          {show ? (
+            <TitleLink to="section">{data.title}</TitleLink>
+          ) : (
+            <TitleP>{data.title}</TitleP>
+          )}
         </HDiv>
-        <ShowAllA>모두 표시</ShowAllA>
+        {show && <ShowAllLink to="section">모두 표시</ShowAllLink>}
       </TitleDiv>
       <GridDiv>
         {data.body
@@ -203,8 +218,8 @@ const WebPlayerSection = ({ data, dataNum }: Props) => {
             </ItemDiv>
           ))}
       </GridDiv>
-    </Section>
+    </WrapperSection>
   );
 };
 
-export default WebPlayerSection;
+export default Section;

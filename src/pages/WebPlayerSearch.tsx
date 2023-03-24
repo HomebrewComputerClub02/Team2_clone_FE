@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SearchData = [
@@ -132,6 +133,11 @@ const SearchData = [
   },
 ];
 
+interface Nav {
+  to: string;
+  key: number;
+  bgColor: string;
+}
 const MainView = styled.div`
   background-color: #121212;
   display: flex;
@@ -186,13 +192,14 @@ const SearchDiv = styled.div`
   }
 `;
 
-const A = styled.a`
+const NavLink = styled(Link)<Nav>`
   position: relative;
   border: none;
   border-radius: 8px;
   aspect-ratio: 1/1;
   overflow: hidden;
   box-sizing: border-box;
+  background-color: ${(props) => props.bgColor};
 `;
 const ItemDiv = styled.div`
   box-sizing: border-box;
@@ -220,19 +227,17 @@ const ItemSpan = styled.span`
   z-index: 1;
 `;
 const WebPlayerSearch = () => {
-  const MainRef = useRef<HTMLDivElement>(null);
-  console.log(MainRef.current?.offsetWidth || 0);
   return (
     <MainView>
       <H2>모두 둘러보기</H2>
-      <SearchDiv ref={MainRef}>
+      <SearchDiv>
         {SearchData.map((data, index) => (
-          <A key={index} style={{ backgroundColor: data.bgColor }}>
+          <NavLink to="../genre" key={index} bgColor={data.bgColor}>
             <ItemDiv>
               <ItemSpan>{data.title}</ItemSpan>
               <ItemImg src={data.imgSrc} />
             </ItemDiv>
-          </A>
+          </NavLink>
         ))}
       </SearchDiv>
     </MainView>
