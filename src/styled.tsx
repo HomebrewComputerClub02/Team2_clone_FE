@@ -98,3 +98,7 @@ export const H5 = styled.h5`
     font-size: 10px;
   }
 `;
+
+export const ErrorMsg = styled.p`
+  color: red;
+`;

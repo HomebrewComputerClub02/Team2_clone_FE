@@ -81,10 +81,14 @@ const ButtonP = styled.p`
   font-size: 12px;
 `;
 
+const Div = styled.div`
+  margin: 0 auto;
+`;
+
 function Homebrewtify() {
   const screen = useRecoilValue(screenSize);
   return (
-    <>
+    <Div>
       <TopBar />
       <LoggedOutDiv>
         <Title>
@@ -111,7 +115,7 @@ function Homebrewtify() {
         </SmallP>
       </LoggedOutDiv>
       <HomeFooter />
-    </>
+    </Div>
   );
 }
 
