@@ -1,8 +1,139 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Section from '../components/molecules/Section';
+import MainViewFooter from '../components/molecules/MainViewFooter';
+
+const GridData = [
+  {
+    title: '최근 재생한 항목',
+    body: [
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67616d00001e02580ac3ad7dfc81e509171120',
+        title: 'BORN PINK',
+        titleLink: '/album',
+        artist: ['BLACKPINK'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67616d00001e021a8e7c237aca188a1e314af3',
+        title: '4TH WALL',
+        titleLink: '/album',
+        artist: ['Ruel'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67616d00001e029d28fd01859073a3ae6ea209',
+        title: "NewJeans 1st EP 'New Jeans'",
+        titleLink: '/album',
+        artist: ['NewJeans'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67706f00000002f36e4a301bc00c44b2c944d9',
+        title: 'Korean OST Instrumentals',
+        titleLink: '/album',
+        artist: ["Enjoy your favourite K-drama's OST instrumentals."],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
+        title: 'IU 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab67616d00001e02278d6cf14513bd97cb580fe7',
+        title: 'VIBE (feat. Jimin of BTS)',
+        titleLink: '/album',
+        artist: ['태양', '지민'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://i.scdn.co/image/ab6761610000f1785704a64f34fe29ff73ab56bb',
+        title: '방탄소년단',
+        titleLink: '/album',
+        artist: ['아티스트'],
+        artistLink: '/artist',
+      },
+    ],
+  },
+  {
+    title: '인기 라디오',
+    body: [
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/6HvZYsbFfjnjFrWF950C9d/en',
+        title: 'NewJeans 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
+        title: 'IU 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/6VuMaDnrHyPL1p4EHjYLi7/en',
+        title: 'Charlie Puth 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/6zn0ihyAApAYV51zpXxdEp/en',
+        title: '10cm 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/2SY6OktZyMLdOnscX3DCyS/en',
+        title: 'JANNABI 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+      {
+        imgSrc:
+          'https://seeded-session-images.scdn.co/v1/img/artist/4SpbR6yFEvexJuaBpgAU5p/en',
+        title: 'LE SSERAFIM 라디오',
+        titleLink: '/album',
+        artist: ['만든 사람: Spotify'],
+        artistLink: '/artist',
+      },
+    ],
+  },
+];
+
+interface Data {
+  title: string;
+  body: Array<Item>;
+}
+interface Item {
+  imgSrc: string;
+  title: string;
+  titleLink: string;
+  artist: Array<string>;
+  artistLink: string;
+}
 
 const MainView = styled.div`
-  background-color: white;
+  background-color: #121212;
   display: flex;
   flex-direction: column;
   grid-area: main-view;
@@ -10,16 +141,60 @@ const MainView = styled.div`
   overflow: hidden;
   position: relative;
   width: 100%;
+  min-width: 520px;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 32px;
+  box-sizing: border-box; // box크기에 padding영역과 border영역을 포함해준다.
+  gap: 24px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 15px;
+    background: rgba(233, 7, 53, 0.4); // 차이 두기 위해 색깔 추가
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; // 알아서 자동 설정이라 사실 무의미.
+    background: #217af4;
+  }
 `;
 
-const Div = styled.div`
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1IiBkPSJNMCAwaDMwMHYzMDBIMHoiLz48L3N2Zz4=');
-  height: 100px;
-`;
 const WebPlayerHome = () => {
+  // 화면 크기에 따라 렌더링하는 item수 설정.
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const [dataNum, setDataNum] = useState(0);
+  const calcWidth = (): void => {
+    if (windowSize.width <= 770) setDataNum(2);
+    else if (windowSize.width <= 970) setDataNum(3);
+    else if (windowSize.width <= 1300) setDataNum(4);
+    else if (windowSize.width <= 1500) setDataNum(5);
+    else setDataNum(6);
+  };
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+    calcWidth();
+  };
+
+  useEffect(() => {
+    calcWidth(); //처음에 보여줘야 할 아이템 개수 확인.
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <MainView>
-      <Div />
+      {GridData.map((data: Data, index: number) => (
+        <Section data={data} dataNum={dataNum} show={true} key={index} />
+      ))}
+      <MainViewFooter />
     </MainView>
   );
 };
