@@ -98,7 +98,7 @@ const NavBar = () => {
           </NavButton>
         </NavInnerDiv>
         <NavInnerDiv>
-          <NavLink to="collection/albums">
+          <NavLink to="collection/tracks">
             <FavoriteIcon />
             <NavSpan>좋아요 표시한 곡</NavSpan>
           </NavLink>

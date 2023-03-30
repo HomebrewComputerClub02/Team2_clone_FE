@@ -15,6 +15,7 @@ import WebPlayerCollection from './pages/WebPlayerCollection';
 import WebPlayerAlbums from './pages/WebPlayerAlbums';
 import WebPlayerPlaylists from './pages/WebPlayerPlaylists';
 import WebPlayerArtists from './pages/WebPlayerArtists';
+import WebPlayerTracks from './pages/WebPlayerTracks';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
               {
                 path: 'artists',
                 element: <WebPlayerArtists />,
+              },
+              {
+                path: 'tracks',
+                element: <WebPlayerTracks />,
               },
             ],
           },
