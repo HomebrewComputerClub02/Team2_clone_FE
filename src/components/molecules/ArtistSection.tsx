@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import AlbumBox from '../atoms/AlbumBox';
+import ArtistBox from '../atoms/ArtistBox';
 
 interface Data {
   title: string;
@@ -82,7 +82,7 @@ const GridDiv = styled.div`
   }
 `;
 
-const Section = ({ data, dataNum, show, color }: Props) => {
+const ArtistSection = ({ data, dataNum, show, color }: Props) => {
   return (
     <WrapperSection>
       <TitleDiv>
@@ -101,11 +101,11 @@ const Section = ({ data, dataNum, show, color }: Props) => {
             if (idx < dataNum) return item;
           })
           .map((item: Item, idx: number) => (
-            <AlbumBox item={item} key={idx} />
+            <ArtistBox item={item} key={idx} />
           ))}
       </GridDiv>
     </WrapperSection>
   );
 };
 
-export default Section;
+export default ArtistSection;

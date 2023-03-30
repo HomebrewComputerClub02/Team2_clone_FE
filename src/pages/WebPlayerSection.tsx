@@ -103,7 +103,7 @@ const MainView = styled.div`
 const WebPlayerSection = () => {
   return (
     <MainView>
-      <Section data={GridData} dataNum={10} show={false} />
+      <Section data={GridData} dataNum={10} show={false} color={'#b3b3b3'} />
       <MainViewFooter />
     </MainView>
   );

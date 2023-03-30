@@ -209,7 +209,13 @@ const WebPlayerGenre = () => {
     <MainView>
       <H1>가요</H1>
       {GridData.map((data: Data, index: number) => (
-        <Section data={data} dataNum={dataNum} show={true} key={index} />
+        <Section
+          data={data}
+          dataNum={dataNum}
+          show={true}
+          color={'white'}
+          key={index}
+        />
       ))}
       <MainViewFooter />
     </MainView>
