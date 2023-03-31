@@ -1,8 +1,11 @@
-import React from 'react';
+import { PlayForWork } from '@mui/icons-material';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoBeerOutline, IoNewspaperOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthService from '../stores/AuthService';
 import { getDaysInMonth } from '../stores/functions';
 import {
   ErrorMsg,
@@ -91,7 +94,12 @@ const Select = styled.select`
   }
 `;
 
-function SignUp() {
+interface SignupFormProps {
+  onSignupSuccess: () => void;
+}
+const SignUp: React.FC<{ onSignupSuccess: () => void }> = ({
+  onSignupSuccess,
+}) => {
   const {
     register,
     handleSubmit,
@@ -104,14 +112,26 @@ function SignUp() {
       email2: '',
       pw: '',
       name: '',
-      year: null,
-      month: null,
-      day: null,
+      year: '',
+      month: '',
+      day: '',
+      gender: '',
     },
   });
-  console.log('isDirty', isDirty);
+  const navigate = useNavigate();
+  const [formError, setFormError] = useState<string>('');
   const onSubmit = (data: any) => {
-    console.log(data);
+    const submitData = async (data: any) => {
+      try {
+        await AuthService.signup(data);
+        onSignupSuccess();
+        navigate('/');
+      } catch (error: any) {
+        setFormError(error.response.data.message);
+      }
+    };
+    const result = submitData(data);
+    console.log(result);
   };
   console.log('errors', errors);
   return (
@@ -227,7 +247,7 @@ function SignUp() {
                 'November',
                 'December',
               ].map((month, index) => (
-                <option key={index} value={month}>
+                <option key={index} value={index + 1}>
                   {month}
                 </option>
               ))}
@@ -243,19 +263,25 @@ function SignUp() {
               placeholder="DD"
               {...register('day', {
                 required: 'Enter a valid day of the month.',
-                // validate: {
-                //   correctDate: (value) => {
-                //     const { year } = getValues();
-                //     const { month } = getValues()
-                //     const Date = getDaysInMonth(year, month);
-                //     // return email === value || `The email addresses don't match.`;
-                //     if (Number(value) <= Date && Number(value) >= 1) {
-                //       return
-                //     }
-                //   },
+                validate: {
+                  correctDate: (value) => {
+                    const { year } = getValues();
+                    const { month } = getValues();
+                    const Date = getDaysInMonth(Number(month), Number(year));
+                    console.log(year, month, 'Date', Date);
+                    // return email === value || `The email addresses don't match.`;
+                    return (
+                      (Number(value) <= Date && Number(value) >= 1) ||
+                      'Enter a valid day of the month.'
+                    );
+                  },
+                },
               })}
             ></Input>
-            <ErrorMsg>{errors?.day?.message}</ErrorMsg>
+            {/* {errors.name && errors.name.type === 'required' && (
+              <span>This is required</span>
+            )} */}
+            {errors.day && <ErrorMsg>{errors.day.message}</ErrorMsg>}
           </div>
         </div>
         <Label>What&apos;s your gender?</Label>
@@ -278,7 +304,7 @@ function SignUp() {
               type="radio"
               value={'M'}
               id="male"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -299,7 +325,7 @@ function SignUp() {
               type="radio"
               value={'F'}
               id="female"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -320,7 +346,7 @@ function SignUp() {
               type="radio"
               value={'U'}
               id="unknown"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -347,6 +373,7 @@ function SignUp() {
         >
           Sign up
         </Button>
+        {formError && <div>{formError}</div>}
         <H5>
           Have an account?{' '}
           <a
@@ -359,6 +386,6 @@ function SignUp() {
       </Form>
     </Div>
   );
-}
+};
 
 export default SignUp;

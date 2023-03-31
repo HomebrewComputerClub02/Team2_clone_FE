@@ -1,0 +1,255 @@
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.slider:hover::-webkit-slider-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04aa6d;
+  cursor: pointer;
+}
+
+/* asdf */
+.audioPlayer {
+  --primary: #ffffff;
+  --secondary: #181818;
+  --roundedCorner: 10px;
+
+  align-items: center;
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 33.3vw;
+  background: #181818;
+  height: 100%;
+}
+
+.playPause:hover {
+  transform: scale(1.05);
+}
+
+.forwardBackward {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #5e5d5d;
+  cursor: pointer;
+}
+
+.forwardBackward:hover {
+  color: var(--primary);
+}
+
+.playPause {
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play {
+  margin-left: 4px;
+  display: block;
+  width: 60%;
+}
+
+.pause {
+  display: block;
+  width: 60%;
+}
+
+.currentTime,
+.duration {
+  font-size: 16px;
+  color: #5e5d5d;
+}
+
+.currentTime {
+  margin-left: 25px;
+  color: #5e5d5d;
+}
+
+.progressBar {
+  --bar-bg: #5e5d5d;
+  --seek-before-width: 0;
+  --seek-before-color: #ffffff;
+  --knobby: #ffffff;
+  --selectedKnobby: #1cd760;
+
+  appearance: none;
+  background: var(--bar-bg);
+  border-radius: var(--roundedCorner);
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+  cursor: pointer;
+}
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.progressBar:hover::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  background: #1cd760;
+  cursor: pointer;
+}
+
+/* progress bar - safari */
+.progressBar::-webkit-slider-runnable-track {
+  background: var(--bar-bg);
+  border-radius: var(--roundedCorner);
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-track {
+  background: var(--bar-bg);
+  border-radius: var(--roundedCorner);
+  position: relative;
+  width: 100%;
+  height: 11px;
+  outline: none;
+}
+
+.progressBar::-moz-focus-outer {
+  border: 0;
+}
+
+/* progress bar - chrome and safari */
+.progressBar::before {
+  content: '';
+  height: 11px;
+  width: var(--seek-before-width);
+  background-color: var(--seek-before-color);
+  border-top-left-radius: var(--roundedCorner);
+  border-bottom-left-radius: var(--roundedCorner);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* progress bar - firefox */
+.progressBar::-moz-range-progress {
+  background-color: var(--seek-before-color);
+  border-top-left-radius: var(--roundedCorner);
+  border-bottom-left-radius: var(--roundedCorner);
+  height: 11px;
+}
+
+/* knobby - chrome and safari */
+.progressBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  margin: -2px 0 0 0;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - chrome and safari */
+.progressBar:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+/* knobby - firefox */
+.progressBar::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* knobby while dragging - firefox */
+.progressBar:active::-moz-range-thumb {
+  transform: scale(1.2);
+  background: var(--selectedKnobby);
+}
+
+.progressBarWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.chapter {
+  display: block;
+  height: 11px;
+  background-color: var(--primary);
+  position: absolute;
+  top: 4px;
+  left: var(--left);
+  width: var(--width);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chapter.start {
+  border-top-left-radius: var(--roundedCorner);
+  border-bottom-left-radius: var(--roundedCorner);
+}
+
+.chapter.end {
+  border-top-right-radius: var(--roundedCorner);
+  border-bottom-right-radius: var(--roundedCorner);
+}
+
+.extensionButtons:hover {
+  color: red;
+  cursor: pointer;
+}

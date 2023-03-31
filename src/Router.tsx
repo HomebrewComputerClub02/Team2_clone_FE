@@ -53,11 +53,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <LogIn />,
+        element: <LogIn onLoginSuccess={() => window.location.reload()} />,
       },
       {
         path: 'signup',
-        element: <SignUp />,
+        element: <SignUp onSignupSuccess={() => window.location.reload()} />,
       },
     ],
   },

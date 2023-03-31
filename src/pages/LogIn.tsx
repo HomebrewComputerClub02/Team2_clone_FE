@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoBeerOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,10 @@ import {
   LogoH1,
 } from '../styled';
 import styled from 'styled-components';
+import axios from 'axios';
+import { loginUser } from '../stores/api';
+import { useNavigate } from 'react-router-dom';
+import AuthService from '../stores/AuthService';
 
 const Form = styled.form`
   width: 400px;
@@ -88,7 +92,11 @@ const Button = styled.button`
     color: ${(props) => props.theme.background.greenColor};
   }
 `;
-function LogIn() {
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+const LogIn: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const {
     formState: { errors },
     register,
@@ -99,9 +107,22 @@ function LogIn() {
       pw: '',
     },
   });
-  const onSubmit = () => {
-    console.log('submitted');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const onSubmit = (data: any) => {
+    const onSubmitData = async (data: any) => {
+      // return response.data;
+      try {
+        const token = await AuthService.login(data);
+        onLoginSuccess();
+        navigate('/');
+      } catch (error) {
+        setError('Invalid email or password');
+      }
+    };
+    onSubmitData(data);
   };
+
   return (
     <>
       <Link to="/" style={{ display: 'block', marginTop: '8vh' }}>
@@ -164,6 +185,7 @@ function LogIn() {
             <CheckBox />
           </div>
           <LogInButton onClick={onSubmit}>Log In</LogInButton>
+          {error && <div>{error}</div>}
         </div>
         <Hr />
         <H3>Don&apos;t have an account?</H3>
@@ -171,6 +193,6 @@ function LogIn() {
       </Form>
     </>
   );
-}
+};
 
 export default LogIn;
