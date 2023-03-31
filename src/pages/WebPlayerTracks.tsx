@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
+import LikeTopDiv from './LikeTopDiv';
 
 const TopDivData = {
   imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
@@ -16,7 +16,7 @@ const LikeData = [
     artist: '이하이',
     album: '4 ONLY',
     update: '6일 전',
-    time: '4:00',
+    time: 240,
     musicLink: '',
     artistLink: '',
     albumLink: '',
@@ -27,7 +27,7 @@ const LikeData = [
     artist: 'NewJeans',
     album: "NewJeans 1st EP 'New Jeans'",
     update: '4주 전',
-    time: '3:00',
+    time: 180,
     musicLink: '',
     artistLink: '',
     albumLink: '',
@@ -38,7 +38,7 @@ const LikeData = [
     artist: 'BLACKPINK',
     album: 'BORN PINK',
     update: '4주 전',
-    time: '3:06',
+    time: 186,
     musicLink: '',
     artistLink: '',
     albumLink: '',
@@ -49,7 +49,7 @@ const LikeData = [
     artist: 'NewJeans',
     album: "NewJeans 1st EP 'New Jeans'",
     update: '4주 전',
-    time: '3:55',
+    time: 235,
     musicLink: '',
     artistLink: '',
     albumLink: '',
@@ -68,7 +68,7 @@ const Section = styled.section`
 const WebPlayerTracks = () => {
   return (
     <Section>
-      <PlaylistTopDiv data={TopDivData} num={LikeData.length} />
+      <LikeTopDiv data={TopDivData} num={LikeData.length} />
       <PlaylistMidDiv />
       <PlaylistBottomDiv data={LikeData} />
     </Section>
