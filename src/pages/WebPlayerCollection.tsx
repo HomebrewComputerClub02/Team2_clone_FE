@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
-import Section from '../components/molecules/Section';
 import { Outlet } from 'react-router-dom';
 
 const MainView = styled.div`

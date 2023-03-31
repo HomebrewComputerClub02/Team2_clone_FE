@@ -11,7 +11,7 @@ interface Data {
   artist: string;
   album: string;
   update: string;
-  time: string;
+  time: number;
   musicLink: string;
   artistLink: string;
   albumLink: string;
@@ -210,7 +210,11 @@ const PlaylistBottomDiv = ({ data }: Props) => {
                   fontSize: '20px',
                 }}
               />
-              <ItemSpan>{value.time}</ItemSpan>
+              <ItemSpan>
+                {value.time % 60 >= 10
+                  ? Math.floor(value.time / 60) + ':' + (value.time % 60)
+                  : Math.floor(value.time / 60) + ':0' + (value.time % 60)}
+              </ItemSpan>
             </LikeDiv>
           </ItemDiv>
         ))}

@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-const MidDiv = styled.div`
-  background-color: rgb(80, 56, 160);
+interface Props {
+  mainColor?: string;
+}
+
+const MidDiv = styled.div<{ bg?: string }>`
+  background-color: ${(props) => props.bg || 'rgb(80, 56, 160)'};
   background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0, #121212 100%);
   height: 120px;
   padding: 24px 32px;
@@ -29,9 +33,9 @@ const PlayButton = styled.button`
   cursor: pointer;
 `;
 
-const PlaylistMidDiv = () => {
+const PlaylistMidDiv = ({ mainColor }: Props) => {
   return (
-    <MidDiv>
+    <MidDiv bg={mainColor}>
       <ButtonDiv>
         <PlayButton>
           <PlayCircleIcon
