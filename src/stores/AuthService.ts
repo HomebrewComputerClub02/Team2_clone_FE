@@ -23,11 +23,11 @@ export interface SignUpProps {
 }
 export interface LoginProps {
   email: string;
-  password: string;
+  pw: string;
 }
 
 class AuthService {
-  private BASE_URL = `http://1.239.183.179:9876`;
+  private BASE_URL = `http://172.30.1.17:8080`;
   private TOKEN_KEY = 'jwtToken';
 
   public async signup({
@@ -39,24 +39,25 @@ class AuthService {
     day,
     gender,
   }: SignUpProps): Promise<string> {
+    console.log('trying to sign up');
     const response = await axios.post(`${this.BASE_URL}/users/signup`, {
-      email,
-      pw,
-      name,
-      year,
-      month,
-      day,
-      gender,
+      email: email,
+      password: pw,
+      nickname: name,
+      birth: new Date(year, month, day),
+      gender: gender,
     });
     return response.data;
   }
 
-  public async login({ email, password }: LoginProps): Promise<string> {
+  public async login({ email, pw }: LoginProps): Promise<string> {
+    console.log(email, pw);
     const response = await axios.post(`${this.BASE_URL}/users/login`, {
-      email,
-      password,
+      email: email,
+      password: pw,
     });
-    const token = response.data;
+    const token = response.data.result.jwt;
+    console.log('token', token);
     localStorage.setItem(this.TOKEN_KEY, token);
     return token;
   }

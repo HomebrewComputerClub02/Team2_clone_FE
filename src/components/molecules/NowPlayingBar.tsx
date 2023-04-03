@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MusicProfilePropsSample } from '../../stores/SampleData';
 import MusicController from './MusicController';
-import MusicExtension from './MusicExtension';
 import MusicProfile from './MusicProfile';
 
 const NowPlayingDiv = styled.div`
@@ -25,7 +24,6 @@ const NowPlayingBar = () => {
     <NowPlayingDiv>
       <MusicProfile {...MusicProfilePropsSample} />
       <MusicController />
-      <MusicExtension />
     </NowPlayingDiv>
   );
 };

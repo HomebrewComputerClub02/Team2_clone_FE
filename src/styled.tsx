@@ -1,6 +1,5 @@
 import { IoBeerOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-
 //for all
 export const Logo = styled.div`
   margin: 50px;

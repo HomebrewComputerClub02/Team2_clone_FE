@@ -84,7 +84,7 @@ const NavBar = () => {
           </NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="">
+          <NavLink to="collection/playlists">
             <LibraryMusicIcon />
             <NavSpan>내 라이브러리</NavSpan>
           </NavLink>
@@ -98,7 +98,7 @@ const NavBar = () => {
           </NavButton>
         </NavInnerDiv>
         <NavInnerDiv>
-          <NavLink to="">
+          <NavLink to="collection/tracks">
             <FavoriteIcon />
             <NavSpan>좋아요 표시한 곡</NavSpan>
           </NavLink>

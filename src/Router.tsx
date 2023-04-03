@@ -11,6 +11,14 @@ import WebPlayerGenre from './pages/WebPlayerGenre';
 import WebPlayerSection from './pages/WebPlayerSection';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import WebPlayerCollection from './pages/WebPlayerCollection';
+import WebPlayerAlbums from './pages/WebPlayerAlbums';
+import WebPlayerPlaylists from './pages/WebPlayerPlaylists';
+import WebPlayerArtists from './pages/WebPlayerArtists';
+import WebPlayerTracks from './pages/WebPlayerTracks';
+import WebPlayerQueue from './pages/WebPlayerQueue';
+import WebPlayerAlbumPlayList from './pages/WebPlayerAlbumPlayList';
+import WebPlayerArtistPlayList from './pages/WebPlayerArtistPlayList';
 
 const router = createBrowserRouter([
   {
@@ -36,10 +44,22 @@ const router = createBrowserRouter([
           {
             path: 'album',
             element: <WebPlayerAlbum />,
+            children: [
+              {
+                path: ':albumId',
+                element: <WebPlayerAlbumPlayList />,
+              },
+            ],
           },
           {
             path: 'artist',
             element: <WebPlayerArtist />,
+            children: [
+              {
+                path: ':artistId',
+                element: <WebPlayerArtistPlayList />,
+              },
+            ],
           },
           {
             path: 'genre',
@@ -49,11 +69,37 @@ const router = createBrowserRouter([
             path: 'section',
             element: <WebPlayerSection />,
           },
+          {
+            path: 'queue',
+            element: <WebPlayerQueue />,
+          },
+          {
+            path: 'collection',
+            element: <WebPlayerCollection />,
+            children: [
+              {
+                path: 'playlists',
+                element: <WebPlayerPlaylists />,
+              },
+              {
+                path: 'albums',
+                element: <WebPlayerAlbums />,
+              },
+              {
+                path: 'artists',
+                element: <WebPlayerArtists />,
+              },
+              {
+                path: 'tracks',
+                element: <WebPlayerTracks />,
+              },
+            ],
+          },
         ],
       },
       {
         path: 'login',
-        element: <LogIn onLoginSuccess={() => window.location.reload()} />,
+        element: <LogIn onLoginSuccess={() => console.log('success')} />,
       },
       {
         path: 'signup',

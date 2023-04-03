@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = `http://1.239.183.179:9876`;
+export const BASE_URL = `http://172.30.1.17:8080`;
 
 export interface LoginProps {
   email: string;

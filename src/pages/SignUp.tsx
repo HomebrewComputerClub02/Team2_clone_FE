@@ -123,6 +123,7 @@ const SignUp: React.FC<{ onSignupSuccess: () => void }> = ({
   const onSubmit = (data: any) => {
     const submitData = async (data: any) => {
       try {
+        console.log('data');
         await AuthService.signup(data);
         onSignupSuccess();
         navigate('/');

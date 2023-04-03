@@ -1,20 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { MdOutlineFilterFrames } from 'react-icons/md';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 export interface MusicProfileProps {
   ImgSrc: string;
   artist: string;
   song: string;
 }
-const Img = styled.img`
-  display: block;
-  height: 60px;
-  width: 60px;
+
+export const ItemDiv = styled.div`
+  background-color: #181818;
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #282828;
+    > div > div {
+      opacity: 1;
+      bottom: 8px;
+      transition: all 0.3s ease;
+    }
+  }
+`;
+export const ImgDiv = styled.div`
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+  position: relative;
+`;
+export const ButtonDiv = styled.div`
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  z-index: 3;
+  right: 8px;
+  bottom: 0px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  &:hover {
+    > button {
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+  }
 `;
 
+export const PlayButton = styled.button`
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: relative;
+  padding: 0px;
+  cursor: pointer;
+`;
+export const BlackDiv = styled.div`
+  width: 0;
+  height: 0;
+  border-bottom: 9.6px solid transparent;
+  border-top: 9.6px solid transparent;
+  border-left: 15.3px solid black;
+  border-right: 15.3px solid transparent;
+  position: absolute;
+  top: 50%;
+  left: 69.6%;
+  transform: translate(-50%, -50%);
+`;
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+`;
 function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
+  const [isPhotoExpand, setPhotoExpand] = useState(false);
+  const togglePhoto = () => {
+    setPhotoExpand((prev) => !prev);
+  };
+  console.log('isPhotoExpand', isPhotoExpand);
   return (
     <div
       style={{
@@ -22,9 +88,37 @@ function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
         justifyContent: 'space-around',
         alignItems: 'center',
         width: '33.3vw',
+        position: 'relative',
       }}
     >
-      <Img src={ImgSrc}></Img>
+      <ItemDiv>
+        <ImgDiv>
+          <Img src={ImgSrc} />
+          <ButtonDiv>
+            <PlayButton>
+              <KeyboardArrowUpIcon
+                sx={{
+                  fontSize: '48px',
+                }}
+                onClick={togglePhoto}
+              />
+            </PlayButton>
+          </ButtonDiv>
+        </ImgDiv>
+      </ItemDiv>
+      {isPhotoExpand && (
+        <Img
+          src={ImgSrc}
+          style={{
+            width: '200px',
+            height: '200px',
+            position: 'absolute',
+            top: '-200px',
+            left: '10px',
+            zIndex: '200',
+          }}
+        ></Img>
+      )}
       <div
         style={{
           display: 'flex',
@@ -36,10 +130,10 @@ function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
           height: '50%',
         }}
       >
-        <Link to="/">
+        <Link to="album/asdfasdfasdfasdf">
           <p style={{ color: '#eeeeee', fontSize: '14px' }}>{song}</p>
         </Link>
-        <Link to="/">
+        <Link to="artist/asdfasdfasdfasdf">
           <p style={{ color: '#eeeeee', fontSize: '12px' }}>{artist}</p>
         </Link>
       </div>

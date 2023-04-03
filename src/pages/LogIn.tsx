@@ -16,7 +16,6 @@ import axios from 'axios';
 import { loginUser } from '../stores/api';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../stores/AuthService';
-
 const Form = styled.form`
   width: 400px;
   margin: 0 auto;
@@ -115,7 +114,6 @@ const LogIn: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
       try {
         const token = await AuthService.login(data);
         onLoginSuccess();
-        navigate('/');
       } catch (error) {
         setError('Invalid email or password');
       }

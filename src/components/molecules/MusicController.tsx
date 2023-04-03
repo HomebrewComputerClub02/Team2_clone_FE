@@ -1,21 +1,34 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './AudioPlayer.module.css';
-import { BsArrowLeftShort } from 'react-icons/bs';
+import { BsArrowLeftShort, BsVolumeUpFill } from 'react-icons/bs';
 import { BsArrowRightShort } from 'react-icons/bs';
 import { FaPlay } from 'react-icons/fa';
 import { FaPause } from 'react-icons/fa';
+import { TbMicrophone2 } from 'react-icons/tb';
+import { MdQueueMusic } from 'react-icons/md';
+import { BiDevices } from 'react-icons/bi';
+import { ImEnlarge2 } from 'react-icons/im';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+import { useNavigate } from 'react-router-dom';
 
 const MusicController = () => {
+  //navigate
+  const navigate = useNavigate();
   // state
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [currentVolume, setCurrentVolume] = useState(0.5);
 
   // references
   const audioPlayer = useRef<any>(); // reference our audio component
   const progressBar = useRef<any>(); // reference our progress bar
+  const volumeBar = useRef<any>();
   const animationRef = useRef<any>(); // reference the animation
 
+  const onQueue = () => {
+    navigate('/open/queue');
+  };
   useEffect(() => {
     const seconds = Math.floor(audioPlayer.current.duration);
     setDuration(seconds);
@@ -44,7 +57,9 @@ const MusicController = () => {
 
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
+    volumeBar.current.value = audioPlayer.current.volume * 100;
     changePlayerCurrentTime();
+    changePlayerCurrentVolume();
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
 
@@ -53,6 +68,16 @@ const MusicController = () => {
     changePlayerCurrentTime();
   };
 
+  const changeVolume = () => {
+    audioPlayer.current.volume = volumeBar.current.value / 100;
+  };
+  const changePlayerCurrentVolume = () => {
+    volumeBar.current.style.setProperty(
+      '--seek-before-width',
+      `${volumeBar.current.value / 100}`,
+    );
+    setCurrentVolume(volumeBar.current.value / 100);
+  };
   const changePlayerCurrentTime = () => {
     progressBar.current.style.setProperty(
       '--seek-before-width',
@@ -71,47 +96,87 @@ const MusicController = () => {
     changeRange();
   };
 
+  const handle = useFullScreenHandle();
   return (
-    <div className={styles.audioPlayer}>
-      <audio ref={audioPlayer} preload="metadata">
-        <source src="mp3/dontcry.mp3" type="audio/mpeg"></source>
-      </audio>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <button className={styles.forwardBackward} onClick={backThirty}>
-          <BsArrowLeftShort /> 30
-        </button>
-        <button onClick={togglePlayPause} className={styles.playPause}>
-          {isPlaying ? (
-            <FaPause className={styles.pause} />
-          ) : (
-            <FaPlay className={styles.play} />
-          )}
-        </button>
-        <button className={styles.forwardBackward} onClick={forwardThirty}>
-          30 <BsArrowRightShort />
-        </button>
-      </div>
-      <div className={styles.progressBarWrapper}>
-        {/* current time */}
-        <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
-
-        {/* progress bar */}
-        <div style={{ width: '80%', display: 'inline-block' }}>
-          <input
-            type="range"
-            className={styles.progressBar}
-            defaultValue="0"
-            ref={progressBar}
-            onChange={changeRange}
-          />
+    <FullScreen handle={handle} className={styles.fullscreen}>
+      <div className={styles.audioPlayer}>
+        <audio ref={audioPlayer} preload="metadata">
+          <source src="mp3/dontcry.mp3" type="audio/mpeg"></source>
+        </audio>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <button className={styles.forwardBackward} onClick={backThirty}>
+            <BsArrowLeftShort /> 30
+          </button>
+          <button onClick={togglePlayPause} className={styles.playPause}>
+            {isPlaying ? (
+              <FaPause className={styles.pause} />
+            ) : (
+              <FaPlay className={styles.play} />
+            )}
+          </button>
+          <button className={styles.forwardBackward} onClick={forwardThirty}>
+            30 <BsArrowRightShort />
+          </button>
         </div>
+        <div className={styles.progressBarWrapper}>
+          {/* current time */}
+          <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
 
-        {/* duration */}
-        <div className={styles.duration}>
-          {duration && !isNaN(duration) && calculateTime(duration)}
+          {/* progress bar */}
+          <div style={{ width: '80%', display: 'inline-block' }}>
+            <input
+              type="range"
+              className={styles.progressBar}
+              defaultValue="0"
+              ref={progressBar}
+              onChange={changeRange}
+            />
+          </div>
+
+          {/* duration */}
+          <div className={styles.duration}>
+            {duration && !isNaN(duration) && calculateTime(duration)}
+          </div>
         </div>
       </div>
-    </div>
+      <div className={styles.extenstionWrapper}>
+        <TbMicrophone2
+          size={'20px'}
+          style={{ marginInline: '10px', color: '#EEEEEE' }}
+          className={styles.extensionButtons}
+        />
+        <MdQueueMusic
+          size={'20px'}
+          style={{ marginInline: '10px', color: '#EEEEEE' }}
+          className={styles.extensionButtons}
+          onClick={onQueue}
+        />
+        <BsVolumeUpFill
+          size={'20px'}
+          style={{ marginInline: '10px', color: '#EEEEEE' }}
+          className={styles.extensionButtons}
+        />
+        <input
+          type="range"
+          className={styles.progressBar}
+          defaultValue="0"
+          ref={volumeBar}
+          style={{ width: '120px' }}
+          onChange={changeVolume}
+        />
+        <BiDevices
+          size={'20px'}
+          style={{ marginInline: '10px', color: '#EEEEEE' }}
+          className={styles.extensionButtons}
+        />
+        <ImEnlarge2
+          size={'15px'}
+          style={{ marginInline: '10px', color: '#EEEEEE' }}
+          className={styles.extensionButtons}
+          onClick={handle.enter}
+        />
+      </div>
+    </FullScreen>
   );
 };
 

@@ -91,7 +91,7 @@ function Homebrewtify() {
   return (
     <Div>
       <TopBar />
-      {AuthService.isAuthenticated() ? (
+      {!AuthService.isAuthenticated() ? (
         <LoggedOutDiv>
           <Title>
             다⁠양⁠한 해⁠외 히⁠트⁠곡⁠과 국⁠내 인⁠기 음⁠악⁠을 들⁠어⁠보⁠세⁠요
@@ -116,7 +116,9 @@ function Homebrewtify() {
             Spotify 서비스를 이용하려면 Premium을 구독해야 합니다.
           </SmallP>
         </LoggedOutDiv>
-      ) : null}
+      ) : (
+        <LoggedInDiv></LoggedInDiv>
+      )}
       <HomeFooter />
     </Div>
   );
