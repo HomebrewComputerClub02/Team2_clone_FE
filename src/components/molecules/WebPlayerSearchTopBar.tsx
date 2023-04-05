@@ -5,6 +5,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import SearchIcon from '@mui/icons-material/Search';
+
+interface Props {
+  onChangeHandler: any;
+}
 
 const TopBar = styled.header`
   grid-area: top-bar;
@@ -15,7 +20,7 @@ const TopBar = styled.header`
   padding: 16px 32px;
   display: flex;
   gap: 48px;
-  justify-content: space-between;
+  align-items: center;
 `;
 const ArrowDiv = styled.div`
   display: flex;
@@ -40,6 +45,7 @@ const ButtonDiv = styled.button`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
+  margin-left: auto;
   &:hover {
     background-color: #282828;
   }
@@ -56,7 +62,23 @@ const NameSpan = styled.span`
   color: white;
   margin-left: 8px;
 `;
-function WebPlayerTopBar() {
+const SearchDiv = styled.div`
+  display: flex;
+  background-color: white;
+  flex: 0.4;
+  border-radius: 16px;
+  padding-left: 16px;
+  height: 40px;
+  align-items: center;
+`;
+const Input = styled.input`
+  border: 0;
+  border-radius: 16px;
+  width: 100%;
+  outline: 0;
+  font-size: 16px;
+`;
+function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
   return (
     <TopBar>
       <ArrowDiv>
@@ -67,6 +89,13 @@ function WebPlayerTopBar() {
           <ArrowForwardIosIcon fontSize="small" sx={{ marginLeft: '2px' }} />
         </ArrowButton>
       </ArrowDiv>
+      <SearchDiv>
+        <SearchIcon sx={{ color: 'black', fontSize: '32px' }} />
+        <Input
+          onChange={onChangeHandler}
+          placeholder="어떤 음악을 듣고 싶으세요?"
+        />
+      </SearchDiv>
       <ButtonDiv>
         <Avatar
           src="/broken-image.jpg"
@@ -82,4 +111,4 @@ function WebPlayerTopBar() {
   );
 }
 
-export default WebPlayerTopBar;
+export default WebPlayerSearchTopBar;

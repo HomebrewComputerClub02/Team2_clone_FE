@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import Section from '../components/molecules/Section';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 
 const GridData = [
   {
@@ -206,19 +207,22 @@ const WebPlayerGenre = () => {
   }, []);
 
   return (
-    <MainView>
-      <H1>가요</H1>
-      {GridData.map((data: Data, index: number) => (
-        <Section
-          data={data}
-          dataNum={dataNum}
-          show={true}
-          color={'white'}
-          key={index}
-        />
-      ))}
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerTopBar />
+      <MainView>
+        <H1>가요</H1>
+        {GridData.map((data: Data, index: number) => (
+          <Section
+            data={data}
+            dataNum={dataNum}
+            show={true}
+            color={'white'}
+            key={index}
+          />
+        ))}
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
+import WebPlayerSearchTopBar from '../components/molecules/WebPlayerSearchTopBar';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 
 const SearchData = [
   {
@@ -230,21 +232,30 @@ const ItemSpan = styled.span`
   z-index: 1;
 `;
 const WebPlayerSearch = () => {
+  const [text, setText] = useState('');
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  useEffect(() => console.log(text), [text]);
   return (
-    <MainView>
-      <H2>모두 둘러보기</H2>
-      <SearchDiv>
-        {SearchData.map((data, index) => (
-          <NavLink to="../genre" key={index} bgColor={data.bgColor}>
-            <ItemDiv>
-              <ItemSpan>{data.title}</ItemSpan>
-              <ItemImg src={data.imgSrc} />
-            </ItemDiv>
-          </NavLink>
-        ))}
-      </SearchDiv>
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerSearchTopBar onChangeHandler={onChangeHandler} />
+      <MainView>
+        <H2>모두 둘러보기</H2>
+        <SearchDiv>
+          {SearchData.map((data, index) => (
+            <NavLink to="../genre" key={index} bgColor={data.bgColor}>
+              <ItemDiv>
+                <ItemSpan>{data.title}</ItemSpan>
+                <ItemImg src={data.imgSrc} />
+              </ItemDiv>
+            </NavLink>
+          ))}
+        </SearchDiv>
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 

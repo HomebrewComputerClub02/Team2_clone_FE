@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import { Outlet } from 'react-router-dom';
+import WebPlayerCollectionTopBar from '../components/molecules/WebPlayerCollectionTopBar';
 
 const MainView = styled.div`
   background-color: #121212;
@@ -32,10 +33,13 @@ const MainView = styled.div`
 
 const WebPlayerCollection = () => {
   return (
-    <MainView>
-      <Outlet />
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerCollectionTopBar />
+      <MainView>
+        <Outlet />
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 

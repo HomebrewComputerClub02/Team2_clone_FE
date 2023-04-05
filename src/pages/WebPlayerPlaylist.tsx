@@ -5,6 +5,7 @@ import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import MainViewFooter from '../components/molecules/MainViewFooter';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 
 const TopDivData = {
   imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
@@ -108,14 +109,17 @@ const Section = styled.section`
 
 const WebPlayerPlaylist = () => {
   return (
-    <MainView>
-      <Section>
-        <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-        <PlaylistMidDiv mainColor={TopDivData.mainColor} />
-        <PlaylistBottomDiv data={PlaylistData} />
-      </Section>
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerTopBar />
+      <MainView>
+        <Section>
+          <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
+          <PlaylistMidDiv mainColor={TopDivData.mainColor} />
+          <PlaylistBottomDiv data={PlaylistData} />
+        </Section>
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 
