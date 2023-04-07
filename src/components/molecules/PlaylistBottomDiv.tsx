@@ -7,6 +7,22 @@ import Song from './Song';
 import { useRecoilState } from 'recoil';
 import { GlobalTracks } from '../../stores/atom';
 
+interface Data {
+  imgSrc: string;
+  music: string;
+  artist: string;
+  album: string;
+  update: string;
+  time: number;
+  musicLink: string;
+  artistLink: string;
+  albumLink: string;
+}
+
+interface Props {
+  data: Array<Track>;
+}
+
 export const BottomDiv = styled.div`
   border: 1px solid transparent;
   border-radius: 4px;

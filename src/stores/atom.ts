@@ -17,11 +17,11 @@ export const GlobalTracks = atom({
     {
       imgSrc:
         'https://i.scdn.co/image/ab67616d00004851d5d11b6ac4242aaa41c8be69',
-      title: 'ONLY',
+      music: 'ONLY',
       artist: '이하이',
       album: '4 ONLY',
       update: '6일 전',
-      time: '4:00',
+      time: 240,
       musicLink: '/mp3/dontcry.mp3',
       artistLink: '',
       albumLink: '',

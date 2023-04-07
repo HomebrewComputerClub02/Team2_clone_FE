@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import { TopDivData, Tracks } from '../stores/SampleData';
 import { useRecoilState } from 'recoil';
 import { GlobalTracks } from '../stores/atom';
+import LikeTopDiv from '../components/molecules/LikeTopDiv';
 
 export const Section = styled.section`
   display: flex;
@@ -20,7 +20,7 @@ export const Section = styled.section`
 const WebPlayerTracks = () => {
   return (
     <Section>
-      <PlaylistTopDiv data={TopDivData} num={Tracks.length} />
+      <LikeTopDiv data={TopDivData} num={Tracks.length} />
       <PlaylistMidDiv data={Tracks} type={'liked'} />
       <PlaylistBottomDiv data={Tracks} />
     </Section>

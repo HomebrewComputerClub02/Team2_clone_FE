@@ -109,7 +109,7 @@ const NavBar = () => {
       </HrDiv>
       <NavUl>
         <NavLi>내 플레이리스트 #2</NavLi>
-        <NavLi>내 플레이리스트 #1</NavLi>
+        <NavLink to="playlist">내 플레이리스트 #1</NavLink>
       </NavUl>
     </Nav>
   );

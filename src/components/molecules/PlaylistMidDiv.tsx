@@ -8,8 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Track } from '../../stores/SampleData';
 import { useRecoilState } from 'recoil';
 import { GlobalPlay, GlobalTracks, GlobalTracksIndex } from '../../stores/atom';
-const MidDiv = styled.div`
-  background-color: rgb(80, 56, 160);
+const MidDiv = styled.div<{ bg?: string }>`
+  background-color: ${(props) => props.bg || 'rgb(80, 56, 160)'};
   background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0, #121212 100%);
   height: 120px;
   padding: 24px 32px;
@@ -40,10 +40,11 @@ const PlayButton = styled.button`
 
 interface PlayListMidDivProps {
   data: Track[];
-  type: string;
+  type?: string;
+  mainColor?: string;
 }
 
-const PlaylistMidDiv = ({ type, data }: PlayListMidDivProps) => {
+const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
   const [globalTracks, setGlobalTracks] = useRecoilState(GlobalTracks);
   const [index, setIndex] = useRecoilState(GlobalTracksIndex);
   const [isplaying, setIsplaying] = useRecoilState(GlobalPlay);
@@ -68,7 +69,7 @@ const PlaylistMidDiv = ({ type, data }: PlayListMidDivProps) => {
   };
   console.log('isPlaying', isplaying);
   return (
-    <MidDiv>
+    <MidDiv bg={mainColor}>
       <ButtonDiv>
         <PlayButton onClick={onTogglePlay}>
           {!isplaying ? (

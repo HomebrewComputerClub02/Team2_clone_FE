@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
-import Section from '../components/molecules/Section';
 import { Outlet } from 'react-router-dom';
+import WebPlayerCollectionTopBar from '../components/molecules/WebPlayerCollectionTopBar';
 
 export const MainView = styled.div`
   background-color: #121212;
@@ -33,10 +33,13 @@ export const MainView = styled.div`
 
 const WebPlayerCollection = () => {
   return (
-    <MainView>
-      <Outlet />
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerCollectionTopBar />
+      <MainView>
+        <Outlet />
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 

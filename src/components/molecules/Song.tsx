@@ -158,7 +158,7 @@ function Song({ index, data }: SongProps) {
         <Img src={data.imgSrc} />
         <TextDiv>
           <BottomLink color="white" to={'/open/track/asdf'}>
-            {data.title}
+            {data.music}
           </BottomLink>
           <BottomLink className="hover" fs="14px" to={'/open/track/qwer'}>
             {data.artist}

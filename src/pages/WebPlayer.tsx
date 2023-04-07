@@ -30,7 +30,6 @@ const Layout = styled.div`
 const WebPlayer = () => {
   return (
     <Layout>
-      <WebPlayerTopBar />
       <NavBar />
       <Outlet />
       <NowPlayingBar />
