@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { Link } from 'react-router-dom';
-
+import { AiFillPauseCircle, AiFillPlayCircle } from 'react-icons/ai';
 interface Item {
   imgSrc: string;
   title: string;
@@ -60,8 +60,11 @@ export const PlayButton = styled.button`
   position: relative;
   padding: 0px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-export const BlackDiv = styled.div`
+export const PlayDiv = styled.div`
   width: 0;
   height: 0;
   border-bottom: 9.6px solid transparent;
@@ -120,20 +123,53 @@ export const SubNameLink = styled(Link)`
   }
 `;
 
+export const LayerDiv = styled.div`
+  zindex: -10;
+  width: 15px;
+  height: 15px;
+  background: black;
+  overflow: show;
+  position: relative;
+`;
+
 const AlbumBox = ({ item }: Props) => {
+  const [isplaying, setIsplaying] = useState(false);
+  const onTogglePlay = () => {
+    setIsplaying((prev) => !prev);
+  };
   return (
     <ItemDiv>
       <ImgDiv>
         <Img src={item.imgSrc} />
         <ButtonDiv>
-          <PlayButton>
-            <PlayCircleIcon
-              sx={{
-                color: '#12d760',
-                fontSize: '48px',
-              }}
-            />
-            <BlackDiv />
+          <PlayButton onClick={onTogglePlay}>
+            {!isplaying ? (
+              <LayerDiv>
+                <AiFillPauseCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            ) : (
+              <LayerDiv>
+                <AiFillPlayCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            )}
           </PlayButton>
         </ButtonDiv>
       </ImgDiv>

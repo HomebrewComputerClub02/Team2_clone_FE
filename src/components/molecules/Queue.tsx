@@ -127,8 +127,16 @@ const PlayList = ({
     //오디오 플레이어의 볼륨을 조절함
     audioElem.current.volume = divVolume / 100;
   };
+
+  //toggle mute
+  const onToggleMute = () => {
+    if (currentSong.volume != 0) {
+      audioElem.current.volume = 0;
+    } else {
+      audioElem.current.volume = 0.5;
+    }
+  };
   useEffect(() => {
-    console.log(currentSong.volume);
     if (currentSong.progress == 100) {
       console.log('재생완료');
       skiptoNext();
@@ -164,7 +172,15 @@ const PlayList = ({
         </ProgressBarWrapper>
       </Div1>
       <Div2>
-        <IoMdVolumeHigh />
+        <div onClick={onToggleMute}>
+          {currentSong.volume > 44 ? (
+            <IoMdVolumeHigh />
+          ) : currentSong.volume > 1 ? (
+            <IoMdVolumeLow />
+          ) : (
+            <IoMdVolumeOff />
+          )}
+        </div>
         <VolumeWrapper onClick={checkVolume} ref={volumeBarRef}>
           <ProgressBar
             // 여기서 re-rendering이 일어남, 노래에 맞춰 시간이 그려짐
