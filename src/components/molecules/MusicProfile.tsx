@@ -6,6 +6,8 @@ import { MdOutlineFilterFrames } from 'react-icons/md';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { BASE_URL, musicId } from '../../stores/SampleData';
+import axios from 'axios';
 export interface MusicProfileProps {
   ImgSrc: string;
   artist: string;
@@ -85,10 +87,31 @@ function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
     //좋아요 조회 api
     setIsLiked(true);
   }, []);
+  const likeSong = async () => {
+    console.log(localStorage.getItem('jwtToken'));
+    axios
+      .post(`${BASE_URL}/like/${musicId}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken'),
+          'Access-Control-Allow-Origin': `http://172.30.1.48:3000`,
+          'Access-Control-Allow-Credentials': 'true',
+        },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log('successfully liked');
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(e.message);
+        console.log(e.code);
+      });
+  };
   const toggleLike = () => {
     if (!isLiked) {
       setIsLiked(true);
       //좋아요 api보냄
+      likeSong();
     } else {
       setIsLiked(false);
     }

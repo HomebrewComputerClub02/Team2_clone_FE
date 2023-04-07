@@ -30,6 +30,7 @@ export interface LoginProps {
 class AuthService {
   private BASE_URL = `http://172.30.1.43:8080`;
   private TOKEN_KEY = 'jwtToken';
+  private REFRESH_TOKEN_KEY = 'refreshToken';
   public cookie = new Cookies();
   public async signup({
     email,
@@ -70,9 +71,9 @@ class AuthService {
         const refreshJwt = res.headers.get('Refresh');
         console.log('By Login Access:' + accessJwt);
         console.log('By Login Refresh:' + refreshJwt);
-        localStorage.setItem('token', accessJwt);
+        localStorage.setItem(this.TOKEN_KEY, accessJwt);
         //도메인 달라지면 쿠키 사용 불가능하니 일단 그냥 로컬스토리지에도 저장
-        localStorage.setItem('refresh', refreshJwt);
+        localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshJwt);
       });
   }
 
