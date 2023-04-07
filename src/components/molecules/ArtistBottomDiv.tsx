@@ -35,12 +35,12 @@ const ItemDiv = styled.div.attrs({ tabIndex: -1 })`
     [time] minmax(120px, 1fr);
   @media screen and (max-width: 970px) {
     grid-template-columns:
-      [index] 16px [title] 6fr [album] 4fr
+      [index] 16px [title] 4fr [play] 2fr
       [time] minmax(120px, 1fr);
   }
   @media screen and (max-width: 770px) {
     grid-template-columns:
-      [index] 16px [title] 6fr
+      [index] 16px [title] 4fr
       [time] minmax(120px, 1fr);
   }
   border: 1px solid transparent;
@@ -152,7 +152,9 @@ const ArtistBottomDiv = ({ data }: Props) => {
                 {value.music}
               </BottomLink>
             </TitleDiv>
-            <PlayDiv>{value.play}</PlayDiv>
+            <PlayDiv className="hover">
+              {Number(value.play).toLocaleString('en')}
+            </PlayDiv>
             <LikeDiv style={{ justifySelf: 'end' }}>
               <FavoriteIcon
                 sx={{
