@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Tracks } from '../../stores/SampleData';
-import PlayList from './PlayList';
+import PlayList from './Queue';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -37,10 +37,13 @@ const MusicController = () => {
 
     //현재 재생중인 시각
     const ct = audioElem.current.currentTime;
+    //오디오 볼륨
+    const volume = audioElem.current.volume * 100;
     setCurrentSong({
       ...currentSong,
       progress: (ct / duration) * 100,
       length: duration,
+      volume,
     });
   };
   return (
