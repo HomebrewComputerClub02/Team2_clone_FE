@@ -19,7 +19,7 @@ const WebPlayerTracks = () => {
   return (
     <Section>
       <PlaylistTopDiv data={TopDivData} num={Tracks.length} />
-      <PlaylistMidDiv />
+      <PlaylistMidDiv data={Tracks} type={'liked'} />
       <PlaylistBottomDiv data={Tracks} />
     </Section>
   );

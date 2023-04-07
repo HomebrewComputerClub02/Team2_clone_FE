@@ -3,6 +3,8 @@ import { Tracks } from '../../stores/SampleData';
 import PlayList from './Queue';
 import React from 'react';
 import styled from 'styled-components';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { GlobalTracks } from '../../stores/atom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,12 +14,14 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const MusicController = () => {
+  //글로벌 트랙
+  const [tracks, setTracks] = useRecoilState(GlobalTracks);
+  console.log('tracks', tracks);
   //songdata 받아오기
-  const [tracks, setTracks] = useState(Tracks);
   //toggleplay
   const [isplaying, setisplaying] = useState(false);
   //현재 재생중인 song
-  const [currentSong, setCurrentSong] = useState<any>(tracks[1]);
+  const [currentSong, setCurrentSong] = useState<any>(tracks[0]);
 
   const audioElem = useRef<any>();
 
