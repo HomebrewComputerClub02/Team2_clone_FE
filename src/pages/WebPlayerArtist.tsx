@@ -1,9 +1,8 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
-import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
-import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import ArtistTopDiv from '../components/molecules/ArtistTopDiv';
 import ArtistMidDiv from '../components/molecules/ArtistMidDiv';
 import ArtistBottomDiv from '../components/molecules/ArtistBottomDiv';

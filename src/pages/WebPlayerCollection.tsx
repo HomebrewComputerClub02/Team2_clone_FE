@@ -4,7 +4,7 @@ import MainViewFooter from '../components/molecules/MainViewFooter';
 import { Outlet } from 'react-router-dom';
 import WebPlayerCollectionTopBar from '../components/molecules/WebPlayerCollectionTopBar';
 
-const MainView = styled.div`
+export const MainView = styled.div`
   background-color: #121212;
   display: flex;
   flex-direction: column;

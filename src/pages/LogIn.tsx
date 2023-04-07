@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoBeerOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import { GoogleButton, H1, H3, LabelInputDiv, Logo, LogoH1 } from '../styled';
+import {
+  ErrorMsg,
+  GoogleButton,
+  H1,
+  H3,
+  LabelInputDiv,
+  Logo,
+  LogoH1,
+} from '../styled';
 import styled from 'styled-components';
-
+import axios from 'axios';
+import { loginUser } from '../stores/api';
+import { useNavigate } from 'react-router-dom';
+import AuthService from '../stores/AuthService';
 const Form = styled.form`
   width: 400px;
   margin: 0 auto;
@@ -48,14 +59,13 @@ const SignUpButton = styled.button`
   width: 100%;
   height: 5vh;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   &:focus {
     border: 1.5px solid black;
   }
 `;
 const CheckBox = styled.input.attrs({ type: 'checkbox' })`
-  appearance: none;
   width: 16px;
   height: 16px;
   border-radius: 3px;
@@ -81,8 +91,36 @@ const Button = styled.button`
     color: ${(props) => props.theme.background.greenColor};
   }
 `;
-function LogIn() {
-  const { formState, register, handleSubmit } = useForm();
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+const LogIn: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      email: '',
+      pw: '',
+    },
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const onSubmit = (data: any) => {
+    const onSubmitData = async (data: any) => {
+      // return response.data;
+      try {
+        const token = await AuthService.login(data);
+        onLoginSuccess();
+      } catch (error) {
+        setError('Invalid email or password');
+      }
+    };
+    onSubmitData(data);
+  };
+
   return (
     <>
       <Link to="/" style={{ display: 'block', marginTop: '8vh' }}>
@@ -92,18 +130,35 @@ function LogIn() {
         </Logo>
       </Link>
       <hr />
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <H1>To continue, log in to Spotify.</H1>
         <GoogleButton>Continue With Google</GoogleButton>
         <p>or</p>
         <Hr />
         <LabelInputDiv>
           <Label htmlFor="email">Email address or username</Label>
-          <Input placeholder="Email address or username"></Input>
+          <Input
+            placeholder="Email address or username"
+            {...register('email', {
+              pattern: {
+                value:
+                  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                message:
+                  "This email is invalid. Make sure it's written like example@email.com",
+              },
+              required: 'You need to enter your email.',
+            })}
+          ></Input>
+          <ErrorMsg>{errors?.email?.message}</ErrorMsg>
         </LabelInputDiv>
         <LabelInputDiv>
           <Label htmlFor="pw">Email address or username</Label>
-          <Input type="password" placeholder="Password"></Input>
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register('pw', { required: 'You need to enter a password.' })}
+          ></Input>
+          <ErrorMsg>{errors?.pw?.message}</ErrorMsg>
         </LabelInputDiv>
         <Button as="a" href="#">
           Forgot your password?
@@ -127,14 +182,15 @@ function LogIn() {
             <p>Rememeber me</p>
             <CheckBox />
           </div>
-          <LogInButton>Log In</LogInButton>
+          <LogInButton onClick={onSubmit}>Log In</LogInButton>
+          {error && <div>{error}</div>}
         </div>
         <Hr />
         <H3>Don&apos;t have an account?</H3>
-        <SignUpButton>Sign up for spotify</SignUpButton>
+        <SignUpButton>Sign up for Homebrewtify</SignUpButton>
       </Form>
     </>
   );
-}
+};
 
 export default LogIn;

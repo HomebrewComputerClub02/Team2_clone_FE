@@ -17,6 +17,9 @@ import WebPlayerPlaylists from './pages/WebPlayerPlaylists';
 import WebPlayerArtists from './pages/WebPlayerArtists';
 import WebPlayerTracks from './pages/WebPlayerTracks';
 import WebPlayerPlaylist from './pages/WebPlayerPlaylist';
+import WebPlayerQueue from './pages/WebPlayerQueue';
+import WebPlayerAlbumPlayList from './pages/WebPlayerAlbumPlayList';
+import WebPlayerArtistPlayList from './pages/WebPlayerArtistPlayList';
 
 const router = createBrowserRouter([
   {
@@ -42,10 +45,22 @@ const router = createBrowserRouter([
           {
             path: 'album',
             element: <WebPlayerAlbum />,
+            children: [
+              {
+                path: ':albumId',
+                element: <WebPlayerAlbumPlayList />,
+              },
+            ],
           },
           {
             path: 'artist',
             element: <WebPlayerArtist />,
+            children: [
+              {
+                path: ':artistId',
+                element: <WebPlayerArtistPlayList />,
+              },
+            ],
           },
           {
             path: 'genre',
@@ -58,6 +73,10 @@ const router = createBrowserRouter([
           {
             path: 'playlist',
             element: <WebPlayerPlaylist />,
+          },
+          {
+            path: 'queue',
+            element: <WebPlayerQueue />,
           },
           {
             path: 'collection',
@@ -85,11 +104,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <LogIn />,
+        element: <LogIn onLoginSuccess={() => console.log('success')} />,
       },
       {
         path: 'signup',
-        element: <SignUp />,
+        element: <SignUp onSignupSuccess={() => window.location.reload()} />,
       },
     ],
   },

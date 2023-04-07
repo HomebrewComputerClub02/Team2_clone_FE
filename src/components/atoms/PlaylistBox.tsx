@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { PlaylistData } from '../molecules/PlaylistSection';
 import { TbMusic } from 'react-icons/tb';
+import { ButtonDiv, LayerDiv, PlayButton } from './AlbumBox';
+import { AiFillPauseCircle, AiFillPlayCircle } from 'react-icons/ai';
 interface Props {
   item: PlaylistData;
 }
@@ -29,44 +31,6 @@ const ImgDiv = styled.div`
   margin-bottom: 16px;
   position: relative;
   flex: 1;
-`;
-const ButtonDiv = styled.div`
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  z-index: 3;
-  right: 8px;
-  bottom: 0px;
-  opacity: 0;
-  transition: all 0.3s ease;
-  &:hover {
-    > button {
-      transform: scale(1.1);
-      transition: all 0.3s ease;
-    }
-  }
-`;
-
-const PlayButton = styled.button`
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  border: none;
-  position: relative;
-  padding: 0px;
-  cursor: pointer;
-`;
-const BlackDiv = styled.div`
-  width: 0;
-  height: 0;
-  border-bottom: 9.6px solid transparent;
-  border-top: 9.6px solid transparent;
-  border-left: 15.3px solid black;
-  border-right: 15.3px solid transparent;
-  position: absolute;
-  top: 50%;
-  left: 69.6%;
-  transform: translate(-50%, -50%);
 `;
 const Img = styled.img<{ br?: string }>`
   width: 100%;
@@ -125,6 +89,10 @@ const ImgGrid = styled.div`
   grid-template-rows: 1fr 1fr;
 `;
 const PlaylistBox = ({ item }: Props) => {
+  const [isplaying, setIsplaying] = useState(false);
+  const onTogglePlay = () => {
+    setIsplaying((prev) => !prev);
+  };
   return (
     <ItemDiv>
       <ImgDiv>
@@ -143,14 +111,34 @@ const PlaylistBox = ({ item }: Props) => {
           <Img src={item.imgSrc[0]} />
         )}
         <ButtonDiv>
-          <PlayButton>
-            <PlayCircleIcon
-              sx={{
-                color: '#12d760',
-                fontSize: '48px',
-              }}
-            />
-            <BlackDiv />
+          <PlayButton onClick={onTogglePlay}>
+            {!isplaying ? (
+              <LayerDiv>
+                <AiFillPauseCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            ) : (
+              <LayerDiv>
+                <AiFillPlayCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            )}
           </PlayButton>
         </ButtonDiv>
       </ImgDiv>

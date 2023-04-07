@@ -23,7 +23,7 @@ interface Props {
   playlistData: Array<PlaylistData>;
 }
 
-const TopDiv = styled.div`
+export const TopDiv = styled.div`
   height: 30vh;
   max-height: 500px;
   min-height: 340px;
@@ -33,21 +33,21 @@ const TopDiv = styled.div`
   position: relative;
   display: flex;
 `;
-const MainColorDiv = styled.div<{ bg?: string }>`
+export const MainColorDiv = styled.div<{ bg?: string }>`
   background-color: ${(props) => props.bg};
   width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
 `;
-const GradDiv = styled.div`
+export const GradDiv = styled.div`
   background: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
   width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
 `;
-const ImgDiv = styled.div`
+export const ImgDiv = styled.div`
   width: 232px;
   height: 232px;
   min-width: 232px;
@@ -55,12 +55,12 @@ const ImgDiv = styled.div`
   margin-inline-end: 24px;
   position: relative;
 `;
-const Img = styled.img`
+export const Img = styled.img`
   width: 100%;
   height: 100%;
   box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
 `;
-const TextDiv = styled.div`
+export const TextDiv = styled.div`
   display: flex;
   flex-flow: column;
   color: white;
@@ -68,11 +68,11 @@ const TextDiv = styled.div`
   justify-content: flex-end;
   gap: 30px;
 `;
-const FirstText = styled.span`
+export const FirstText = styled.span`
   font-size: 14px;
   font-weight: 700;
 `;
-const SecondText = styled.span`
+export const SecondText = styled.span`
   font-size: 96px;
   font-weight: 900;
   margin-block-end: 20px;
@@ -93,10 +93,11 @@ const ThirdText = styled.span`
 const TimeText = styled.span`
   color: hsla(0, 0%, 100%, 0.7);
 `;
-const TextBottomDiv = styled.div`
+
+export const TextBottomDiv = styled.div`
   display: flex;
 `;
-const UserLink = styled(Link)`
+export const UserLink = styled(Link)`
   font-size: 14px;
   font-weight: 700;
   &:hover {

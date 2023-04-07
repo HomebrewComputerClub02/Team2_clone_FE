@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { LayerDiv } from '../atoms/AlbumBox';
+import { AiFillPauseCircle, AiFillPlayCircle } from 'react-icons/ai';
 
 interface Props {
   mainColor?: string;
@@ -34,16 +36,41 @@ const PlayButton = styled.button`
 `;
 
 const PlaylistMidDiv = ({ mainColor }: Props) => {
+  const [isplaying, setIsplaying] = useState(false);
+  const onTogglePlay = () => {
+    setIsplaying((prev) => !prev);
+  };
   return (
     <MidDiv bg={mainColor}>
       <ButtonDiv>
-        <PlayButton>
-          <PlayCircleIcon
-            sx={{
-              color: '#12d760',
-              fontSize: '68px',
-            }}
-          />
+        <PlayButton onClick={onTogglePlay}>
+          {!isplaying ? (
+            <LayerDiv>
+              <AiFillPauseCircle
+                size={'70px'}
+                color={'1CD760'}
+                style={{
+                  zIndex: '10',
+                  position: 'absolute',
+                  top: '-7px',
+                  left: '-7px',
+                }}
+              />
+            </LayerDiv>
+          ) : (
+            <LayerDiv>
+              <AiFillPlayCircle
+                size={'70px'}
+                color={'1CD760'}
+                style={{
+                  zIndex: '10',
+                  position: 'absolute',
+                  top: '-7px',
+                  left: '-7px',
+                }}
+              />
+            </LayerDiv>
+          )}
         </PlayButton>
       </ButtonDiv>
     </MidDiv>

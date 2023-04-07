@@ -3,60 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
-import LikeTopDiv from './LikeTopDiv';
+import { TopDivData, Tracks } from '../stores/SampleData';
+import LikeTopDiv from '../components/molecules/LikeTopDiv';
 
-const TopDivData = {
-  imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
-  playlistName: '좋아요 표시한 곡',
-};
-const LikeData = [
-  {
-    imgSrc: 'https://i.scdn.co/image/ab67616d00004851d5d11b6ac4242aaa41c8be69',
-    music: 'ONLY',
-    artist: '이하이',
-    album: '4 ONLY',
-    update: '6일 전',
-    time: 240,
-    musicLink: '',
-    artistLink: '',
-    albumLink: '',
-  },
-  {
-    imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Attention',
-    artist: 'NewJeans',
-    album: "NewJeans 1st EP 'New Jeans'",
-    update: '4주 전',
-    time: 180,
-    musicLink: '',
-    artistLink: '',
-    albumLink: '',
-  },
-  {
-    imgSrc: 'https://i.scdn.co/image/ab67616d00004851580ac3ad7dfc81e509171120',
-    music: 'Pink Venom',
-    artist: 'BLACKPINK',
-    album: 'BORN PINK',
-    update: '4주 전',
-    time: 186,
-    musicLink: '',
-    artistLink: '',
-    albumLink: '',
-  },
-  {
-    imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Cookie',
-    artist: 'NewJeans',
-    album: "NewJeans 1st EP 'New Jeans'",
-    update: '4주 전',
-    time: 235,
-    musicLink: '',
-    artistLink: '',
-    albumLink: '',
-  },
-];
-
-const Section = styled.section`
+export const Section = styled.section`
   display: flex;
   flex-direction: column;
   color: white;
@@ -68,9 +18,9 @@ const Section = styled.section`
 const WebPlayerTracks = () => {
   return (
     <Section>
-      <LikeTopDiv data={TopDivData} num={LikeData.length} />
+      <LikeTopDiv data={TopDivData} num={Tracks.length} />
       <PlaylistMidDiv />
-      <PlaylistBottomDiv data={LikeData} />
+      <PlaylistBottomDiv data={Tracks} />
     </Section>
   );
 };

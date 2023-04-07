@@ -1,6 +1,5 @@
 import { IoBeerOutline } from 'react-icons/io5';
 import styled from 'styled-components';
-
 //for all
 export const Logo = styled.div`
   margin: 50px;
@@ -97,4 +96,8 @@ export const H5 = styled.h5`
   @media (max-width: 399px) {
     font-size: 10px;
   }
+`;
+
+export const ErrorMsg = styled.p`
+  color: red;
 `;

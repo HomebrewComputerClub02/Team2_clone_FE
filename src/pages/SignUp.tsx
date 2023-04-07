@@ -1,9 +1,14 @@
-import React from 'react';
+import { PlayForWork } from '@mui/icons-material';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { IoBeerOutline, IoNewspaperOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthService from '../stores/AuthService';
+import { getDaysInMonth } from '../stores/functions';
 import {
+  ErrorMsg,
   GoogleButton,
   H1,
   H3,
@@ -88,11 +93,18 @@ const Select = styled.select`
     border: 1px solid ${(props) => props.theme.border.darkGrey};
   }
 `;
-function SignUp() {
+
+interface SignupFormProps {
+  onSignupSuccess: () => void;
+}
+const SignUp: React.FC<{ onSignupSuccess: () => void }> = ({
+  onSignupSuccess,
+}) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
+    getValues,
     setError,
   } = useForm({
     defaultValues: {
@@ -100,13 +112,27 @@ function SignUp() {
       email2: '',
       pw: '',
       name: '',
-      year: null,
-      month: null,
-      day: null,
+      year: '',
+      month: '',
+      day: '',
+      gender: '',
     },
   });
+  const navigate = useNavigate();
+  const [formError, setFormError] = useState<string>('');
   const onSubmit = (data: any) => {
-    console.log(data);
+    const submitData = async (data: any) => {
+      try {
+        console.log('data');
+        await AuthService.signup(data);
+        onSignupSuccess();
+        navigate('/');
+      } catch (error: any) {
+        setFormError(error.response.data.message);
+      }
+    };
+    const result = submitData(data);
+    console.log(result);
   };
   console.log('errors', errors);
   return (
@@ -125,6 +151,7 @@ function SignUp() {
           <Label htmlFor="email1">What&apos;s your email?</Label>
           <Input
             type="text"
+            placeholder="Enter your email."
             {...register('email', {
               pattern: {
                 value:
@@ -135,31 +162,44 @@ function SignUp() {
               required: 'You need to enter your email.',
             })}
           />
-          <p>{errors?.email?.message}</p>
+          <ErrorMsg>{errors?.email?.message}</ErrorMsg>
         </LabelInputDiv>
         <LabelInputDiv>
           <Label htmlFor="email2">Confirm your email</Label>
           <Input
             id="email2"
             placeholder="Enter your email again."
-            {...register('email2')}
+            {...register('email2', {
+              required: 'You need to confirm your email.',
+              validate: {
+                matchesPreviousEmail: (value) => {
+                  const { email } = getValues();
+                  return email === value || `The email addresses don't match.`;
+                },
+              },
+            })}
           ></Input>
+          <ErrorMsg>{errors?.email2?.message}</ErrorMsg>
         </LabelInputDiv>
         <LabelInputDiv>
           <Label htmlFor="pw">Create a password</Label>
           <Input
             id="pw"
             placeholder="Create a password."
-            {...register('pw')}
+            {...register('pw', { required: 'You need to enter a password.' })}
           ></Input>
+          <ErrorMsg>{errors?.pw?.message}</ErrorMsg>
         </LabelInputDiv>
         <LabelInputDiv>
           <Label htmlFor="name">What should we call you?</Label>
           <Input
             id="name"
             placeholder="Enter a profile name."
-            {...register('name')}
+            {...register('name', {
+              required: 'Enter a name for your profile.',
+            })}
           ></Input>
+          <ErrorMsg>{errors?.name?.message}</ErrorMsg>
           <p>This appears on your profile.</p>
         </LabelInputDiv>
         <Label htmlFor="birthday">What&apos;s your date of birth?</Label>
@@ -175,13 +215,25 @@ function SignUp() {
             style={{ display: 'flex', flexDirection: 'column', width: '30%' }}
           >
             <p>Year</p>
-            <Input id="year" placeholder="YYYY" {...register('year')}></Input>
+            <Input
+              id="year"
+              placeholder="YYYY"
+              {...register('year', {
+                required: 'Enter a valid year.',
+              })}
+            ></Input>
+            <ErrorMsg>{errors?.year?.message}</ErrorMsg>
           </div>
           <div
             style={{ display: 'flex', flexDirection: 'column', width: '30%' }}
           >
             <p>Month</p>
-            <Select {...register('month')} placeholder="MM">
+            <Select
+              {...register('month', {
+                required: 'Select your birth month.',
+              })}
+              placeholder="MM"
+            >
               {[
                 'January',
                 'February',
@@ -196,17 +248,41 @@ function SignUp() {
                 'November',
                 'December',
               ].map((month, index) => (
-                <option key={index} value={month}>
+                <option key={index} value={index + 1}>
                   {month}
                 </option>
               ))}
             </Select>
+            <ErrorMsg>{errors?.month?.message}</ErrorMsg>
           </div>
           <div
             style={{ display: 'flex', flexDirection: 'column', width: '30%' }}
           >
             <p>Day</p>
-            <Input id="day" placeholder="DD" {...register('day')}></Input>
+            <Input
+              id="day"
+              placeholder="DD"
+              {...register('day', {
+                required: 'Enter a valid day of the month.',
+                validate: {
+                  correctDate: (value) => {
+                    const { year } = getValues();
+                    const { month } = getValues();
+                    const Date = getDaysInMonth(Number(month), Number(year));
+                    console.log(year, month, 'Date', Date);
+                    // return email === value || `The email addresses don't match.`;
+                    return (
+                      (Number(value) <= Date && Number(value) >= 1) ||
+                      'Enter a valid day of the month.'
+                    );
+                  },
+                },
+              })}
+            ></Input>
+            {/* {errors.name && errors.name.type === 'required' && (
+              <span>This is required</span>
+            )} */}
+            {errors.day && <ErrorMsg>{errors.day.message}</ErrorMsg>}
           </div>
         </div>
         <Label>What&apos;s your gender?</Label>
@@ -229,7 +305,7 @@ function SignUp() {
               type="radio"
               value={'M'}
               id="male"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -250,7 +326,7 @@ function SignUp() {
               type="radio"
               value={'F'}
               id="female"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -271,7 +347,7 @@ function SignUp() {
               type="radio"
               value={'U'}
               id="unknown"
-              name="gender"
+              {...register('gender')}
               style={{ display: 'block', marginRight: '10px' }}
             />
             <label
@@ -298,6 +374,7 @@ function SignUp() {
         >
           Sign up
         </Button>
+        {formError && <div>{formError}</div>}
         <H5>
           Have an account?{' '}
           <a
@@ -310,6 +387,6 @@ function SignUp() {
       </Form>
     </Div>
   );
-}
+};
 
 export default SignUp;

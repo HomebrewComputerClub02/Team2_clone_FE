@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { Link } from 'react-router-dom';
-
+import { AiFillPauseCircle, AiFillPlayCircle } from 'react-icons/ai';
 interface Item {
   imgSrc: string;
   title: string;
@@ -15,7 +15,7 @@ interface Props {
   item: Item;
 }
 
-const ItemDiv = styled.div`
+export const ItemDiv = styled.div`
   background-color: #181818;
   padding: 16px;
   position: relative;
@@ -31,11 +31,11 @@ const ItemDiv = styled.div`
     }
   }
 `;
-const ImgDiv = styled.div`
+export const ImgDiv = styled.div`
   margin-bottom: 16px;
   position: relative;
 `;
-const ButtonDiv = styled.div`
+export const ButtonDiv = styled.div`
   width: 48px;
   height: 48px;
   position: absolute;
@@ -52,7 +52,7 @@ const ButtonDiv = styled.div`
   }
 `;
 
-const PlayButton = styled.button`
+export const PlayButton = styled.button`
   background: transparent;
   width: 100%;
   height: 100%;
@@ -60,8 +60,11 @@ const PlayButton = styled.button`
   position: relative;
   padding: 0px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-const BlackDiv = styled.div`
+export const PlayDiv = styled.div`
   width: 0;
   height: 0;
   border-bottom: 9.6px solid transparent;
@@ -73,17 +76,17 @@ const BlackDiv = styled.div`
   left: 69.6%;
   transform: translate(-50%, -50%);
 `;
-const Img = styled.img`
+export const Img = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 4px;
 `;
-const TextDiv = styled.div`
+export const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 62px;
 `;
-const NameP = styled.p`
+export const NameP = styled.p`
   font-size: 16px;
   color: white;
   font-weight: 700;
@@ -94,7 +97,7 @@ const NameP = styled.p`
   margin-block-end: 4px;
   padding-block-end: 4px;
 `;
-const SubNameDiv = styled.div`
+export const SubNameDiv = styled.div`
   display: flex;
   align-items: baseline;
   color: #b3b3b3;
@@ -102,7 +105,7 @@ const SubNameDiv = styled.div`
   line-height: 1.2;
 `;
 
-const SubNameLink = styled(Link)`
+export const SubNameLink = styled(Link)`
   line-height: 1.2;
   height: 39px;
   display: -webkit-box;
@@ -120,20 +123,53 @@ const SubNameLink = styled(Link)`
   }
 `;
 
+export const LayerDiv = styled.div`
+  zindex: -10;
+  width: 15px;
+  height: 15px;
+  background: black;
+  overflow: show;
+  position: relative;
+`;
+
 const AlbumBox = ({ item }: Props) => {
+  const [isplaying, setIsplaying] = useState(false);
+  const onTogglePlay = () => {
+    setIsplaying((prev) => !prev);
+  };
   return (
     <ItemDiv>
       <ImgDiv>
         <Img src={item.imgSrc} />
         <ButtonDiv>
-          <PlayButton>
-            <PlayCircleIcon
-              sx={{
-                color: '#12d760',
-                fontSize: '48px',
-              }}
-            />
-            <BlackDiv />
+          <PlayButton onClick={onTogglePlay}>
+            {!isplaying ? (
+              <LayerDiv>
+                <AiFillPauseCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            ) : (
+              <LayerDiv>
+                <AiFillPlayCircle
+                  size={'30px'}
+                  color={'1CD760'}
+                  style={{
+                    zIndex: '10',
+                    position: 'absolute',
+                    top: '-7px',
+                    left: '-7px',
+                  }}
+                />
+              </LayerDiv>
+            )}
           </PlayButton>
         </ButtonDiv>
       </ImgDiv>
