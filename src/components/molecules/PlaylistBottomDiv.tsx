@@ -21,7 +21,7 @@ interface Data {
 }
 
 interface Props {
-  data: Array<Data>;
+  data: Array<Track>;
 }
 
 export const BottomDiv = styled.div`
@@ -174,7 +174,7 @@ export interface props {
   data: Track[];
 }
 
-const PlaylistBottomDiv = ({ data }: props) => {
+const PlaylistBottomDiv = ({ data }: Props) => {
   return (
     <BottomDiv>
       <OutlineGrid>
@@ -203,7 +203,7 @@ const PlaylistBottomDiv = ({ data }: props) => {
               <Img src={value.imgSrc} />
               <TextDiv>
                 <BottomLink color="white" to={value.musicLink}>
-                  {value.title}
+                  {value.music}
                 </BottomLink>
                 <BottomLink className="hover" fs="14px" to={value.artistLink}>
                   {value.artist}
