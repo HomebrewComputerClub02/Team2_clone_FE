@@ -31,6 +31,7 @@ const WebPlayer = () => {
   return (
     <Layout>
       <NavBar />
+      <WebPlayerTopBar />
       <Outlet />
       <NowPlayingBar />
     </Layout>

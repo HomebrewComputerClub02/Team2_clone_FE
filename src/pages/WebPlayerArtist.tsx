@@ -89,7 +89,6 @@ const Section = styled.section`
 const WebPlayerArtist = () => {
   return (
     <>
-      <WebPlayerTopBar />
       <MainView>
         <Section>
           <ArtistTopDiv data={TopDivData} />

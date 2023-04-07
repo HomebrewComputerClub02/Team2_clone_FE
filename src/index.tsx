@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './GlobalStyles';
 import router from './Router';
 import { theme } from './theme';
+import { CookiesProvider } from 'react-cookie';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <CookiesProvider>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </CookiesProvider>
     </RecoilRoot>
   </React.StrictMode>,
 );
