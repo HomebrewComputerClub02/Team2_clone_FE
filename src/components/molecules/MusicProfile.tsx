@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { MdOutlineFilterFrames } from 'react-icons/md';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 export interface MusicProfileProps {
   ImgSrc: string;
   artist: string;
@@ -76,7 +78,21 @@ export const Img = styled.img`
   border-radius: 4px;
 `;
 function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
+  const [isLiked, setIsLiked] = useState<boolean>();
   const [isPhotoExpand, setPhotoExpand] = useState(false);
+  //좋아요를 이미 누른 노래면
+  useEffect(() => {
+    //좋아요 조회 api
+    setIsLiked(true);
+  }, []);
+  const toggleLike = () => {
+    if (!isLiked) {
+      setIsLiked(true);
+      //좋아요 api보냄
+    } else {
+      setIsLiked(false);
+    }
+  };
   const togglePhoto = () => {
     setPhotoExpand((prev) => !prev);
   };
@@ -146,11 +162,17 @@ function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
           height: '30px',
         }}
       >
-        <AiOutlineHeart
-          color="#EEEEEE"
-          size={'20px'}
-          style={{ cursor: 'pointer' }}
-        />
+        <div onClick={toggleLike}>
+          {!isLiked ? (
+            <FavoriteBorderIcon
+              style={{ cursor: 'pointer', color: '#eeeeee', fontSize: '20px' }}
+            />
+          ) : (
+            <FavoriteIcon
+              style={{ cursor: 'pointer', color: '#1CD760', fontSize: '20px' }}
+            />
+          )}
+        </div>
         <MdOutlineFilterFrames
           color="#EEEEEE"
           size={'20px'}

@@ -72,7 +72,7 @@ function WebPlayerArtistPlayList() {
   return (
     <Section>
       <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-      <PlaylistMidDiv />
+      <PlaylistMidDiv type="artist" data={Tracks} />
       <PlaylistBottomDiv data={Tracks} />
     </Section>
   );

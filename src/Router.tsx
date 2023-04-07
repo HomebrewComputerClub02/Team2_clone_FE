@@ -20,6 +20,9 @@ import WebPlayerPlaylist from './pages/WebPlayerPlaylist';
 import WebPlayerQueue from './pages/WebPlayerQueue';
 import WebPlayerAlbumPlayList from './pages/WebPlayerAlbumPlayList';
 import WebPlayerArtistPlayList from './pages/WebPlayerArtistPlayList';
+import WebPlayerTrack from './pages/WebPlayerTrack';
+import WebPlayerTrackPlayList from './pages/WebPlayerTrackPlayList';
+import { Tracks } from './stores/SampleData';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +66,16 @@ const router = createBrowserRouter([
             ],
           },
           {
+            path: 'track',
+            element: <WebPlayerTrack />,
+            children: [
+              {
+                path: ':trackId',
+                element: <WebPlayerTrackPlayList />,
+              },
+            ],
+          },
+          {
             path: 'genre',
             element: <WebPlayerGenre />,
           },
@@ -76,7 +89,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'queue',
-            element: <WebPlayerQueue />,
+            element: <WebPlayerQueue data={Tracks} />,
           },
           {
             path: 'collection',

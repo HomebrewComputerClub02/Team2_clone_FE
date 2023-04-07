@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const Nav = styled.div`
   min-width: 170px;
   background-color: #000;

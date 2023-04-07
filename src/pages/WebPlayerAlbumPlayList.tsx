@@ -70,11 +70,10 @@ const PlaylistData = [
 ];
 
 function WebPlayerAlbumPlayList() {
-  console.log('fuck you');
   return (
     <Section>
       <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-      <PlaylistMidDiv />
+      <PlaylistMidDiv data={Tracks} type={'album'} />
       <PlaylistBottomDiv data={Tracks} />
     </Section>
   );
