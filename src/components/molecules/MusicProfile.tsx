@@ -90,11 +90,9 @@ function MusicProfile({ ImgSrc, artist, song }: MusicProfileProps) {
   const likeSong = async () => {
     console.log(localStorage.getItem('jwtToken'));
     axios
-      .post(`${BASE_URL}/like/${musicId}`, {
+      .post(`${BASE_URL}/like/${musicId}`, null, {
         headers: {
           Authorization: localStorage.getItem('jwtToken'),
-          'Access-Control-Allow-Origin': `http://172.30.1.48:3000`,
-          'Access-Control-Allow-Credentials': 'true',
         },
         withCredentials: true,
       })
