@@ -43,7 +43,7 @@ function WebPlayerQueue() {
                 <Img src={value.imgSrc} />
                 <TextDiv>
                   <BottomLink color="white" to={value.musicLink}>
-                    {value.music}
+                    {value.title}
                   </BottomLink>
                   <BottomLink className="hover" fs="14px" to={value.artistLink}>
                     {value.artist}
@@ -82,7 +82,7 @@ function WebPlayerQueue() {
                 <Img src={value.imgSrc} />
                 <TextDiv>
                   <BottomLink color="white" to={value.musicLink}>
-                    {value.music}
+                    {value.title}
                   </BottomLink>
                   <BottomLink className="hover" fs="14px" to={value.artistLink}>
                     {value.artist}

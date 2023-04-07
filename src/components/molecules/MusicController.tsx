@@ -1,182 +1,68 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './AudioPlayer.module.css';
-import { BsArrowLeftShort, BsVolumeUpFill } from 'react-icons/bs';
-import { BsArrowRightShort } from 'react-icons/bs';
-import { FaPlay } from 'react-icons/fa';
-import { FaPause } from 'react-icons/fa';
-import { TbMicrophone2 } from 'react-icons/tb';
-import { MdQueueMusic } from 'react-icons/md';
-import { BiDevices } from 'react-icons/bi';
-import { ImEnlarge2 } from 'react-icons/im';
-import { FullScreen, useFullScreenHandle } from 'react-full-screen';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Tracks } from '../../stores/SampleData';
+import PlayList from './PlayList';
+import React from 'react';
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
 const MusicController = () => {
-  //navigate
-  const navigate = useNavigate();
-  // state
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [currentVolume, setCurrentVolume] = useState(0.5);
+  //songdata 받아오기
+  const [tracks, setTracks] = useState(Tracks);
+  //toggleplay
+  const [isplaying, setisplaying] = useState(false);
+  //현재 재생중인 song
+  const [currentSong, setCurrentSong] = useState<any>(tracks[1]);
 
-  // references
-  const audioPlayer = useRef<any>(); // reference our audio component
-  const progressBar = useRef<any>(); // reference our progress bar
-  const volumeBar = useRef<any>();
-  const animationRef = useRef<any>(); // reference the animation
+  const audioElem = useRef<any>();
 
-  const onQueue = () => {
-    navigate('/open/queue');
-  };
+  //toggleplay
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
-
-  const calculateTime = (secs: number) => {
-    const minutes = Math.floor(secs / 60);
-    const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(secs % 60);
-    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-    return `${returnedMinutes}:${returnedSeconds}`;
-  };
-
-  const togglePlayPause = () => {
-    const prevValue = isPlaying;
-    setIsPlaying(!prevValue);
-    if (!prevValue) {
-      audioPlayer.current.play();
-      animationRef.current = requestAnimationFrame(whilePlaying);
+    if (isplaying) {
+      audioElem.current.play();
     } else {
-      audioPlayer.current.pause();
-      cancelAnimationFrame(animationRef.current);
+      audioElem.current.pause();
     }
-  };
+  }, [isplaying]);
 
-  const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
-    volumeBar.current.value = audioPlayer.current.volume * 100;
-    changePlayerCurrentTime();
-    changePlayerCurrentVolume();
-    animationRef.current = requestAnimationFrame(whilePlaying);
-  };
+  //
+  const onPlaying = () => {
+    //오디오 전체 길이 duration
+    const duration = audioElem.current.duration;
 
-  const changeRange = () => {
-    audioPlayer.current.currentTime = progressBar.current.value;
-    changePlayerCurrentTime();
+    //현재 재생중인 시각
+    const ct = audioElem.current.currentTime;
+    setCurrentSong({
+      ...currentSong,
+      progress: (ct / duration) * 100,
+      length: duration,
+    });
   };
-
-  const changeVolume = () => {
-    audioPlayer.current.volume = volumeBar.current.value / 100;
-  };
-  const changePlayerCurrentVolume = () => {
-    volumeBar.current.style.setProperty(
-      '--seek-before-width',
-      `${volumeBar.current.value / 100}`,
-    );
-    setCurrentVolume(volumeBar.current.value / 100);
-  };
-  const changePlayerCurrentTime = () => {
-    progressBar.current.style.setProperty(
-      '--seek-before-width',
-      `${(progressBar.current.value / duration) * 100}%`,
-    );
-    setCurrentTime(progressBar.current.value);
-  };
-
-  const backThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value - 30);
-    changeRange();
-  };
-
-  const forwardThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value + 30);
-    changeRange();
-  };
-
-  const handle = useFullScreenHandle();
   return (
-    <FullScreen handle={handle} className={styles.fullscreen}>
-      <div className={styles.audioPlayer}>
-        <audio ref={audioPlayer} preload="metadata">
-          <source src="mp3/dontcry.mp3" type="audio/mpeg"></source>
-        </audio>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <button className={styles.forwardBackward} onClick={backThirty}>
-            <BsArrowLeftShort /> 30
-          </button>
-          <button onClick={togglePlayPause} className={styles.playPause}>
-            {isPlaying ? (
-              <FaPause className={styles.pause} />
-            ) : (
-              <FaPlay className={styles.play} />
-            )}
-          </button>
-          <button className={styles.forwardBackward} onClick={forwardThirty}>
-            30 <BsArrowRightShort />
-          </button>
-        </div>
-        <div className={styles.progressBarWrapper}>
-          {/* current time */}
-          <div className={styles.currentTime}>{calculateTime(currentTime)}</div>
-
-          {/* progress bar */}
-          <div style={{ width: '80%', display: 'inline-block' }}>
-            <input
-              type="range"
-              className={styles.progressBar}
-              defaultValue="0"
-              ref={progressBar}
-              onChange={changeRange}
-            />
-          </div>
-
-          {/* duration */}
-          <div className={styles.duration}>
-            {duration && !isNaN(duration) && calculateTime(duration)}
-          </div>
-        </div>
-      </div>
-      <div className={styles.extenstionWrapper}>
-        <TbMicrophone2
-          size={'20px'}
-          style={{ marginInline: '10px', color: '#EEEEEE' }}
-          className={styles.extensionButtons}
-        />
-        <MdQueueMusic
-          size={'20px'}
-          style={{ marginInline: '10px', color: '#EEEEEE' }}
-          className={styles.extensionButtons}
-          onClick={onQueue}
-        />
-        <BsVolumeUpFill
-          size={'20px'}
-          style={{ marginInline: '10px', color: '#EEEEEE' }}
-          className={styles.extensionButtons}
-        />
-        <input
-          type="range"
-          className={styles.progressBar}
-          defaultValue="0"
-          ref={volumeBar}
-          style={{ width: '120px' }}
-          onChange={changeVolume}
-        />
-        <BiDevices
-          size={'20px'}
-          style={{ marginInline: '10px', color: '#EEEEEE' }}
-          className={styles.extensionButtons}
-        />
-        <ImEnlarge2
-          size={'15px'}
-          style={{ marginInline: '10px', color: '#EEEEEE' }}
-          className={styles.extensionButtons}
-          onClick={handle.enter}
-        />
-      </div>
-    </FullScreen>
+    <Wrapper>
+      <audio
+        ref={audioElem}
+        onTimeUpdate={onPlaying}
+        controls
+        style={{ display: 'none' }}
+      >
+        <source src={currentSong.musicLink} type="audio/mpeg" />
+      </audio>
+      <PlayList
+        songs={tracks}
+        setSongs={setTracks}
+        isplaying={isplaying}
+        setisplaying={setisplaying}
+        audioElem={audioElem}
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
+      />
+    </Wrapper>
   );
 };
 

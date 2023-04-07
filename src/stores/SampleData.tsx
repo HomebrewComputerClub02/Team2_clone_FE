@@ -8,7 +8,7 @@ export const MusicProfilePropsSample: MusicProfileProps = {
 
 export interface Track {
   imgSrc: string;
-  music: string;
+  title: string;
   artist: string;
   album: string;
   update: string;
@@ -17,48 +17,49 @@ export interface Track {
   artistLink: string;
   albumLink: string;
 }
+
 export const Tracks: Track[] = [
   {
     imgSrc: 'https://i.scdn.co/image/ab67616d00004851d5d11b6ac4242aaa41c8be69',
-    music: 'ONLY',
+    title: 'ONLY',
     artist: '이하이',
     album: '4 ONLY',
     update: '6일 전',
     time: '4:00',
-    musicLink: '',
+    musicLink: '/mp3/dontcry.mp3',
     artistLink: '',
     albumLink: '',
   },
   {
     imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Attention',
+    title: 'Attention',
     artist: 'NewJeans',
     album: "NewJeans 1st EP 'New Jeans'",
     update: '4주 전',
     time: '3:00',
-    musicLink: '',
+    musicLink: '/mp3/dontcry.mp3',
     artistLink: '',
     albumLink: '',
   },
   {
     imgSrc: 'https://i.scdn.co/image/ab67616d00004851580ac3ad7dfc81e509171120',
-    music: 'Pink Venom',
+    title: 'Pink Venom',
     artist: 'BLACKPINK',
     album: 'BORN PINK',
     update: '4주 전',
     time: '3:06',
-    musicLink: '',
+    musicLink: '/mp3/dontcry.mp3',
     artistLink: '',
     albumLink: '',
   },
   {
     imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Cookie',
+    title: 'Cookie',
     artist: 'NewJeans',
     album: "NewJeans 1st EP 'New Jeans'",
     update: '4주 전',
     time: '3:55',
-    musicLink: '',
+    musicLink: '/mp3/dontcry.mp3',
     artistLink: '',
     albumLink: '',
   },

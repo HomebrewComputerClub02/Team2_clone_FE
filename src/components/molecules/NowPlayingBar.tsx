@@ -11,14 +11,6 @@ const NowPlayingDiv = styled.div`
   display: flex;
 `;
 
-export interface Song {
-  id: number;
-  title: string;
-  artist: string;
-  url: string;
-  duration: number;
-}
-
 const NowPlayingBar = () => {
   return (
     <NowPlayingDiv>

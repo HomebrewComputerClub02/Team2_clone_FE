@@ -1,25 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-
-interface Data {
-  imgSrc: string;
-  music: string;
-  artist: string;
-  album: string;
-  update: string;
-  time: string;
-  musicLink: string;
-  artistLink: string;
-  albumLink: string;
-}
-
-interface Props {
-  data: Array<Data>;
-}
+import { Track } from '../../stores/SampleData';
+import { useRecoilState } from 'recoil';
+import { musicFromQueue, musicFromQueuePlay } from '../../stores/atom';
 
 export const BottomDiv = styled.div`
   border: 1px solid transparent;
@@ -167,7 +154,11 @@ export const PlayButton = styled.button`
   }
 `;
 
-const PlaylistBottomDiv = ({ data }: Props) => {
+export interface props {
+  data: Track[];
+}
+
+const PlaylistBottomDiv = ({ data }: props) => {
   return (
     <BottomDiv>
       <OutlineGrid>
@@ -196,7 +187,7 @@ const PlaylistBottomDiv = ({ data }: Props) => {
               <Img src={value.imgSrc} />
               <TextDiv>
                 <BottomLink color="white" to={value.musicLink}>
-                  {value.music}
+                  {value.title}
                 </BottomLink>
                 <BottomLink className="hover" fs="14px" to={value.artistLink}>
                   {value.artist}
