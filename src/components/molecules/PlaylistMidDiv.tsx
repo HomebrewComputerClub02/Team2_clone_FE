@@ -40,8 +40,8 @@ const PlayButton = styled.button`
 
 interface PlayListMidDivProps {
   data: Track[];
-  type: string;
-  mainColor: string;
+  type?: string;
+  mainColor?: string;
 }
 
 const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
