@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import WebPlayerSearchTopBar from '../components/molecules/WebPlayerSearchTopBar';
 import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
+import { searchListApi } from '../remote.tsx/search';
 
 const SearchData = [
   {
@@ -237,7 +238,16 @@ const WebPlayerSearch = () => {
     setText(e.target.value);
   };
 
+  const [searchData, setSearchData] = useState([]);
+
+  // 검색 텍스트
   useEffect(() => console.log(text), [text]);
+
+  useEffect(() => {
+    searchListApi().then((res) => {
+      setSearchData(res.data);
+    });
+  }, []);
   return (
     <>
       <WebPlayerSearchTopBar onChangeHandler={onChangeHandler} />
