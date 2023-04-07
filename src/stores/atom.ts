@@ -28,3 +28,13 @@ export const GlobalTracks = atom({
     },
   ] as Track[],
 });
+
+export const GlobalTracksIndex = atom({
+  key: 'GlobalTracksIndex',
+  default: 0,
+});
+
+export const GlobalPlay = atom({
+  key: 'GlobalPlay',
+  default: false,
+});

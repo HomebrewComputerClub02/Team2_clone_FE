@@ -9,6 +9,8 @@ import {
 import styled from 'styled-components';
 
 import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from 'react-icons/io';
+import { useRecoilState } from 'recoil';
+import { GlobalTracksIndex } from '../../stores/atom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -71,7 +73,8 @@ const PlayList = ({
 }: any) => {
   const progressBarRef = useRef<any>();
   const volumeBarRef = useRef<any>();
-
+  const [globalIndex, setGlobalIndex] = useRecoilState(GlobalTracksIndex);
+  console.log('songs', songs);
   //toggle 재생
   const PlayPause = () => {
     setisplaying(!isplaying);
@@ -95,11 +98,13 @@ const PlayList = ({
     //현재 음원의 위치를 알아냄
     const index = songs.findIndex((x: any) => x.title == currentSong.title);
     if (index == 0) {
-      //만약 지금 재생중인게 첫 음원이면 지금 음원을 초기화
+      //만약 지금 재생중인게 첫 마지막으로
       setCurrentSong(songs[songs.length - 1]);
+      setGlobalIndex(songs.length - 1);
     } else {
       //처음이 아니면 이전곡으로
       setCurrentSong(songs[index - 1]);
+      setGlobalIndex(index - 1);
     }
     audioElem.current.currentTime = 0;
   };
@@ -112,9 +117,11 @@ const PlayList = ({
     if (index == songs.length - 1) {
       //마지막이면 처음으로
       setCurrentSong(songs[0]);
+      setGlobalIndex(0);
     } else {
       //아니면 그냥 다음으로
       setCurrentSong(songs[index + 1]);
+      setGlobalIndex(index + 1);
     }
     audioElem.current.currentTime = 0;
   };

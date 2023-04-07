@@ -21,7 +21,7 @@ import WebPlayerAlbumPlayList from './pages/WebPlayerAlbumPlayList';
 import WebPlayerArtistPlayList from './pages/WebPlayerArtistPlayList';
 import WebPlayerTrack from './pages/WebPlayerTrack';
 import WebPlayerTrackPlayList from './pages/WebPlayerTrackPlayList';
-import { Tracks } from './stores/SampleData';
+import { AlbumTrack } from './stores/SampleData';
 
 const router = createBrowserRouter([
   {
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'queue',
-            element: <WebPlayerQueue data={Tracks} />,
+            element: <WebPlayerQueue data={AlbumTrack} />,
           },
           {
             path: 'collection',

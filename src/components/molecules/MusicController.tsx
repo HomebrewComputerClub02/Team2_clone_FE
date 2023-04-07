@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Tracks } from '../../stores/SampleData';
 import PlayList from './Queue';
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { GlobalTracks } from '../../stores/atom';
+import { GlobalPlay, GlobalTracks, GlobalTracksIndex } from '../../stores/atom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,16 +14,20 @@ const Wrapper = styled.div`
 `;
 const MusicController = () => {
   //글로벌 트랙
+  const [isplaying, setisplaying] = useRecoilState(GlobalPlay);
+  const [globalIndex, setGlobalIndex] = useRecoilState(GlobalTracksIndex);
   const [tracks, setTracks] = useRecoilState(GlobalTracks);
+  const index = useRecoilValue(GlobalTracksIndex);
   console.log('tracks', tracks);
+  console.log('index', index);
   //songdata 받아오기
   //toggleplay
-  const [isplaying, setisplaying] = useState(false);
   //현재 재생중인 song
-  const [currentSong, setCurrentSong] = useState<any>(tracks[0]);
+  const [currentSong, setCurrentSong] = useState<any>(tracks[globalIndex]);
 
   const audioElem = useRef<any>();
 
+  //
   //toggleplay
   useEffect(() => {
     if (isplaying) {

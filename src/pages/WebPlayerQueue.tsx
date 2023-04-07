@@ -1,7 +1,7 @@
 import React from 'react';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
-import { Track, Tracks } from '../stores/SampleData';
+import { Track, AlbumTrack } from '../stores/SampleData';
 import { MainView } from './WebPlayerCollection';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FavoriteIcon from '@mui/icons-material/Favorite';

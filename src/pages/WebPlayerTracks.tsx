@@ -5,6 +5,8 @@ import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import { TopDivData, Tracks } from '../stores/SampleData';
+import { useRecoilState } from 'recoil';
+import { GlobalTracks } from '../stores/atom';
 
 export const Section = styled.section`
   display: flex;

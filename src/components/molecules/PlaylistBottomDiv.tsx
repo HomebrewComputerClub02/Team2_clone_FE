@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Track } from '../../stores/SampleData';
 import Song from './Song';
+import { useRecoilState } from 'recoil';
+import { GlobalTracks } from '../../stores/atom';
 
 export const BottomDiv = styled.div`
   border: 1px solid transparent;
@@ -48,6 +50,10 @@ export interface props {
 }
 
 const PlaylistBottomDiv = ({ data }: props) => {
+  const [globalTracks, setGlobalTracks] = useRecoilState(GlobalTracks);
+  const submitGlobalTracks = () => {
+    setGlobalTracks(data);
+  };
   return (
     <BottomDiv>
       <OutlineGrid>
@@ -61,7 +67,9 @@ const PlaylistBottomDiv = ({ data }: props) => {
       </OutlineGrid>
       <FlexDiv>
         {data.map((value, index) => (
-          <Song data={value} index={index} key={index} />
+          <div onClick={submitGlobalTracks} key={index}>
+            <Song data={value} index={index} />
+          </div>
         ))}
       </FlexDiv>
     </BottomDiv>
