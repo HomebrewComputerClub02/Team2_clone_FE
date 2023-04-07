@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import Section from '../components/molecules/Section';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 
 const GridData = {
   title: '최근 재생한 항목',
@@ -102,10 +103,13 @@ const MainView = styled.div`
 
 const WebPlayerSection = () => {
   return (
-    <MainView>
-      <Section data={GridData} dataNum={10} show={false} color={'#b3b3b3'} />
-      <MainViewFooter />
-    </MainView>
+    <>
+      <WebPlayerTopBar />
+      <MainView>
+        <Section data={GridData} dataNum={10} show={false} color={'#b3b3b3'} />
+        <MainViewFooter />
+      </MainView>
+    </>
   );
 };
 

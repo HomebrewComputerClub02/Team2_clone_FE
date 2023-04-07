@@ -5,6 +5,22 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Track } from '../../stores/SampleData';
 import Song from './Song';
 
+interface Data {
+  imgSrc: string;
+  music: string;
+  artist: string;
+  album: string;
+  update: string;
+  time: number;
+  musicLink: string;
+  artistLink: string;
+  albumLink: string;
+}
+
+interface Props {
+  data: Array<Track>;
+}
+
 export const BottomDiv = styled.div`
   border: 1px solid transparent;
   border-radius: 4px;
@@ -47,7 +63,7 @@ export interface props {
   data: Track[];
 }
 
-const PlaylistBottomDiv = ({ data }: props) => {
+const PlaylistBottomDiv = ({ data }: Props) => {
   return (
     <BottomDiv>
       <OutlineGrid>

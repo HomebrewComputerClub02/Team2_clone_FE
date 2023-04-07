@@ -1,9 +1,12 @@
 import React from 'react';
-import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
-import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
+import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
+import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
+import MainViewFooter from '../components/molecules/MainViewFooter';
+import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 import { Tracks } from '../stores/SampleData';
-import { Section } from './WebPlayerTracks';
 
 const TopDivData = {
   imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
@@ -69,14 +72,56 @@ const PlaylistData = [
   },
 ];
 
-function WebPlayerAlbumPlayList() {
-  return (
-    <Section>
-      <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-      <PlaylistMidDiv data={Tracks} type={'album'} />
-      <PlaylistBottomDiv data={Tracks} />
-    </Section>
-  );
-}
+const MainView = styled.div`
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  grid-area: main-view;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  min-width: 520px;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 32px;
+  box-sizing: border-box; // box크기에 padding영역과 border영역을 포함해준다.
+  gap: 24px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 15px;
+    background: rgba(233, 7, 53, 0.4); // 차이 두기 위해 색깔 추가
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10%; // 알아서 자동 설정이라 사실 무의미.
+    background: #217af4;
+  }
+`;
 
-export default WebPlayerAlbumPlayList;
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-top: -24px;
+  margin-left: -24px;
+  margin-right: -24px;
+`;
+
+const WebPlayerPlaylist = () => {
+  return (
+    <>
+      <WebPlayerTopBar />
+      <MainView>
+        <Section>
+          <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
+          <PlaylistMidDiv data={Tracks} mainColor={TopDivData.mainColor} />
+          <PlaylistBottomDiv data={PlaylistData} />
+        </Section>
+        <MainViewFooter />
+      </MainView>
+    </>
+  );
+};
+
+export default WebPlayerPlaylist;

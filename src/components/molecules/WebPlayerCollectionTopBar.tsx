@@ -15,7 +15,6 @@ const TopBar = styled.header`
   padding: 16px 32px;
   display: flex;
   gap: 48px;
-  justify-content: space-between;
 `;
 const ArrowDiv = styled.div`
   display: flex;
@@ -30,7 +29,22 @@ const ArrowButton = styled.button`
   width: 32px;
   height: 32px;
 `;
-
+const LinkNav = styled.nav`
+  flex-grow: 1;
+`;
+const NavUl = styled.ul`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  height: 100%;
+`;
+const NavLi = styled.li``;
+const NavLink = styled(Link)`
+  background-color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 700;
+`;
 const ButtonDiv = styled.button`
   display: flex;
   padding: 2px;
@@ -56,7 +70,7 @@ const NameSpan = styled.span`
   color: white;
   margin-left: 8px;
 `;
-function WebPlayerTopBar() {
+function WebPlayerCollectionTopBar() {
   return (
     <TopBar>
       <ArrowDiv>
@@ -67,6 +81,19 @@ function WebPlayerTopBar() {
           <ArrowForwardIosIcon fontSize="small" sx={{ marginLeft: '2px' }} />
         </ArrowButton>
       </ArrowDiv>
+      <LinkNav>
+        <NavUl>
+          <NavLi>
+            <NavLink to="playlists">플레이리스트</NavLink>
+          </NavLi>
+          <NavLi>
+            <NavLink to="artists">아티스트</NavLink>
+          </NavLi>
+          <NavLi>
+            <NavLink to="albums">앨범</NavLink>
+          </NavLi>
+        </NavUl>
+      </LinkNav>
       <ButtonDiv>
         <Avatar
           src="/broken-image.jpg"
@@ -82,4 +109,4 @@ function WebPlayerTopBar() {
   );
 }
 
-export default WebPlayerTopBar;
+export default WebPlayerCollectionTopBar;
