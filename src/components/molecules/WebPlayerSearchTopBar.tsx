@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
+import axios from 'axios';
+import { BASE_URL } from '../../stores/SampleData';
 
 interface Props {
   onChangeHandler: any;
@@ -79,6 +81,85 @@ const Input = styled.input`
   font-size: 16px;
 `;
 function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
+  const inputRef = useRef<any>();
+  const SearchMusicAPI = async (keyword: string) => {
+    console.log(localStorage.getItem('jwtToken'));
+    axios
+      .get(`${BASE_URL}/searchMusic/${keyword}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken'),
+        },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(e.message);
+        console.log(e.code);
+      });
+  };
+  const SearchAllAPI = async (keyword: string) => {
+    console.log(localStorage.getItem('jwtToken'));
+    axios
+      .get(`${BASE_URL}/searchAll/${keyword}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken'),
+        },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(e.message);
+        console.log(e.code);
+      });
+  };
+  const SearchAlbumAPI = async (keyword: string) => {
+    console.log(localStorage.getItem('jwtToken'));
+    axios
+      .get(`${BASE_URL}/searchAlbum/${keyword}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken'),
+        },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(e.message);
+        console.log(e.code);
+      });
+  };
+  const SearchArtistAPI = async (keyword: string) => {
+    console.log(localStorage.getItem('jwtToken'));
+    axios
+      .get(`${BASE_URL}/searchArtist/${keyword}`, {
+        headers: {
+          Authorization: localStorage.getItem('jwtToken'),
+        },
+        withCredentials: true,
+      })
+      .then((res: any) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        console.log(e.message);
+        console.log(e.code);
+      });
+  };
+  const onSearch = (e: any) => {
+    e.preventDefault();
+    console.log(inputRef.current.value);
+    console.log('search');
+    SearchArtistAPI(inputRef.current.value);
+  };
   return (
     <TopBar>
       <ArrowDiv>
@@ -91,10 +172,13 @@ function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
       </ArrowDiv>
       <SearchDiv>
         <SearchIcon sx={{ color: 'black', fontSize: '32px' }} />
-        <Input
-          onChange={onChangeHandler}
-          placeholder="어떤 음악을 듣고 싶으세요?"
-        />
+        <form onSubmit={onSearch}>
+          <Input
+            ref={inputRef}
+            onChange={onChangeHandler}
+            placeholder="어떤 음악을 듣고 싶으세요?"
+          />
+        </form>
       </SearchDiv>
       <ButtonDiv>
         <Avatar
