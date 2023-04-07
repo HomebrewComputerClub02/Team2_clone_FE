@@ -5,6 +5,8 @@ import { Track } from '../../stores/SampleData';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { useRecoilState } from 'recoil';
+import { GlobalPlay, GlobalTracksIndex } from '../../stores/atom';
 
 export const ItemDiv = styled.div.attrs({ tabIndex: -1 })`
   display: grid;
@@ -120,6 +122,8 @@ interface SongProps {
   data: Track;
 }
 function Song({ index, data }: SongProps) {
+  const [trackIndex, setTrackIndex] = useRecoilState(GlobalTracksIndex);
+  const [globalPlay, setGlobalPlay] = useRecoilState(GlobalPlay);
   const [isLiked, setIsLiked] = useState<boolean>();
   //좋아요를 이미 누른 노래면
   useEffect(() => {
@@ -134,8 +138,12 @@ function Song({ index, data }: SongProps) {
       setIsLiked(false);
     }
   };
+  const onGlobalPlay = () => {
+    setTrackIndex(index);
+    setGlobalPlay((prev) => !prev);
+  };
   return (
-    <ItemDiv key={index}>
+    <ItemDiv key={index} onClick={onGlobalPlay}>
       <IndexDiv>
         <Index className="index">{index + 1}</Index>
         <PlayButton className="play">

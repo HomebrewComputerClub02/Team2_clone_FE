@@ -2,15 +2,9 @@ import React from 'react';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
+import { TopDivData, AlbumTrack } from '../stores/SampleData';
 import { Tracks } from '../stores/SampleData';
 import { Section } from './WebPlayerTracks';
-
-const TopDivData = {
-  imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
-  playlistName: '내 플레이리스트 #1',
-  mainColor: 'rgb(128, 120, 96)',
-};
-
 const PlaylistData = [
   {
     imgSrc: 'https://i.scdn.co/image/ab67616d00001e02112b210accd05345a17a46f0',
@@ -72,9 +66,9 @@ const PlaylistData = [
 function WebPlayerAlbumPlayList() {
   return (
     <Section>
-      <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-      <PlaylistMidDiv data={Tracks} type={'album'} />
-      <PlaylistBottomDiv data={Tracks} />
+      <PlaylistTopDiv data={TopDivData} playlistData={AlbumTrack} />
+      <PlaylistMidDiv data={AlbumTrack} type={'album'} />
+      <PlaylistBottomDiv data={AlbumTrack} />
     </Section>
   );
 }

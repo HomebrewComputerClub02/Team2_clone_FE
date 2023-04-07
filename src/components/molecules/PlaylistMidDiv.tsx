@@ -7,7 +7,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Track } from '../../stores/SampleData';
 import { useRecoilState } from 'recoil';
-import { GlobalTracks } from '../../stores/atom';
+import { GlobalPlay, GlobalTracks, GlobalTracksIndex } from '../../stores/atom';
 const MidDiv = styled.div<{ bg?: string }>`
   background-color: ${(props) => props.bg || 'rgb(80, 56, 160)'};
   background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0, #121212 100%);
@@ -46,10 +46,12 @@ interface PlayListMidDivProps {
 
 const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
   const [globalTracks, setGlobalTracks] = useRecoilState(GlobalTracks);
-  const [isplaying, setIsplaying] = useState(false);
+  const [index, setIndex] = useRecoilState(GlobalTracksIndex);
+  const [isplaying, setIsplaying] = useRecoilState(GlobalPlay);
   const [isLiked, setIsLiked] = useState<boolean>();
   const onTogglePlay = () => {
     setIsplaying((prev) => !prev);
+    setIndex(0);
     setGlobalTracks(data);
   };
   //좋아요를 이미 누른 playlist이면
@@ -65,13 +67,14 @@ const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
       setIsLiked(false);
     }
   };
+  console.log('isPlaying', isplaying);
   return (
     <MidDiv bg={mainColor}>
       <ButtonDiv>
         <PlayButton onClick={onTogglePlay}>
           {!isplaying ? (
             <LayerDiv>
-              <AiFillPauseCircle
+              <AiFillPlayCircle
                 size={'70px'}
                 color={'1CD760'}
                 style={{
@@ -84,7 +87,7 @@ const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
             </LayerDiv>
           ) : (
             <LayerDiv>
-              <AiFillPlayCircle
+              <AiFillPauseCircle
                 size={'70px'}
                 color={'1CD760'}
                 style={{

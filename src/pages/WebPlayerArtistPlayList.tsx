@@ -2,14 +2,9 @@ import React from 'react';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistTopDiv from '../components/molecules/PlaylistTopDiv';
+import { TopDivData, ArtistTrack } from '../stores/SampleData';
 import { Tracks } from '../stores/SampleData';
 import { Section } from './WebPlayerTracks';
-
-const TopDivData = {
-  imgSrc: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
-  playlistName: '내 플레이리스트 #1',
-  mainColor: 'rgb(128, 120, 96)',
-};
 
 const PlaylistData = [
   {
@@ -72,8 +67,8 @@ function WebPlayerArtistPlayList() {
   return (
     <Section>
       <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
-      <PlaylistMidDiv type="artist" data={Tracks} />
-      <PlaylistBottomDiv data={Tracks} />
+      <PlaylistMidDiv type="artist" data={ArtistTrack} />
+      <PlaylistBottomDiv data={ArtistTrack} />
     </Section>
   );
 }
