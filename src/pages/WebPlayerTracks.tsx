@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import { TopDivData, Tracks } from '../stores/SampleData';
-import { useRecoilState } from 'recoil';
-import { GlobalTracks } from '../stores/atom';
 import LikeTopDiv from '../components/molecules/LikeTopDiv';
 
 export const Section = styled.section`

@@ -27,7 +27,7 @@ export interface LoginProps {
 }
 
 class AuthService {
-  private BASE_URL = `http://172.30.1.17:8080`;
+  private BASE_URL = `http://172.30.1.43:8080`;
   private TOKEN_KEY = 'jwtToken';
 
   public async signup({
