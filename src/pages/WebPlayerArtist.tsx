@@ -5,7 +5,8 @@ import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 import PlaylistMidDiv from '../components/molecules/PlaylistMidDiv';
 import PlaylistBottomDiv from '../components/molecules/PlaylistBottomDiv';
 import ArtistTopDiv from '../components/molecules/ArtistTopDiv';
-import { url } from 'inspector';
+import ArtistMidDiv from '../components/molecules/ArtistMidDiv';
+import ArtistBottomDiv from '../components/molecules/ArtistBottomDiv';
 
 const MainView = styled.div`
   background-color: #121212;
@@ -37,51 +38,43 @@ const MainView = styled.div`
 const TopDivData = {
   imgSrc: 'https://t1.daumcdn.net/cfile/tistory/999FDF3E5BDD225116',
   artistName: 'Red Velvet',
+  mainColor: 'rgb(128, 120, 96)',
 };
-const LikeData = [
+const PopularData = [
   {
-    imgSrc: 'https://i.scdn.co/image/ab67616d00004851d5d11b6ac4242aaa41c8be69',
-    music: 'ONLY',
-    artist: '이하이',
-    album: '4 ONLY',
-    update: '6일 전',
-    time: 240,
+    imgSrc: 'https://i.scdn.co/image/ab67616d00001e02df5022bdf1ac4bf52135c4be',
+    music: 'Psycho',
+    play: 379131914,
+    time: 210,
     musicLink: '',
-    artistLink: '',
-    albumLink: '',
   },
   {
-    imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Attention',
-    artist: 'NewJeans',
-    album: "NewJeans 1st EP 'New Jeans'",
-    update: '4주 전',
-    time: 180,
+    imgSrc: 'https://i.scdn.co/image/ab67616d00001e028c4a282e84a53c1c8acf129a',
+    music: 'Feel My Rhythm',
+    play: 106643964,
+    time: 210,
     musicLink: '',
-    artistLink: '',
-    albumLink: '',
   },
   {
-    imgSrc: 'https://i.scdn.co/image/ab67616d00004851580ac3ad7dfc81e509171120',
-    music: 'Pink Venom',
-    artist: 'BLACKPINK',
-    album: 'BORN PINK',
-    update: '4주 전',
-    time: 186,
+    imgSrc: 'https://i.scdn.co/image/ab67616d00001e02b64001fa6292caefc7605550',
+    music: 'Bad Boy',
+    play: 237760258,
+    time: 210,
     musicLink: '',
-    artistLink: '',
-    albumLink: '',
   },
   {
-    imgSrc: 'https://i.scdn.co/image/ab67616d000048519d28fd01859073a3ae6ea209',
-    music: 'Cookie',
-    artist: 'NewJeans',
-    album: "NewJeans 1st EP 'New Jeans'",
-    update: '4주 전',
-    time: 235,
+    imgSrc: 'https://i.scdn.co/image/ab67616d00001e023f30a062dafcdbc1a8fad842',
+    music: '러시안 룰렛(Russian Roulette)',
+    play: 160306514,
+    time: 211,
     musicLink: '',
-    artistLink: '',
-    albumLink: '',
+  },
+  {
+    imgSrc: 'https://i.scdn.co/image/ab67616d00001e026538b8e1b5c7b2a9d2211769',
+    music: '피카부 (Peek-A-Boo)',
+    play: 176418553,
+    time: 189,
+    musicLink: '',
   },
 ];
 
@@ -100,9 +93,9 @@ const WebPlayerArtist = () => {
       <WebPlayerTopBar />
       <MainView>
         <Section>
-          <ArtistTopDiv data={TopDivData} num={LikeData.length} />
-          <PlaylistMidDiv />
-          <PlaylistBottomDiv data={LikeData} />
+          <ArtistTopDiv data={TopDivData} />
+          <ArtistMidDiv mainColor={TopDivData.mainColor} />
+          <ArtistBottomDiv data={PopularData} />
         </Section>
         <MainViewFooter />
       </MainView>

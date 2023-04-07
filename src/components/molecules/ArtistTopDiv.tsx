@@ -6,11 +6,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface Data {
   imgSrc: string;
   artistName: string;
+  mainColor: string;
 }
 
 interface Props {
   data: Data;
-  num: number;
 }
 
 const TopDiv = styled.div`
@@ -72,7 +72,7 @@ const TextBottomDiv = styled.div`
   display: flex;
 `;
 
-const ArtistTopDiv = ({ data, num }: Props) => {
+const ArtistTopDiv = ({ data }: Props) => {
   return (
     <TopDiv
       style={
