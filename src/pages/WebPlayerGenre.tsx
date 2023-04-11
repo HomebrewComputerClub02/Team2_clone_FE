@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import GenreSection from '../components/molecules/GenreSection';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import Section from '../components/molecules/Section';
 import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
+import { genreApi } from '../remote.tsx/search';
 
 const GridData = [
   {
@@ -130,15 +133,12 @@ const GridData = [
 ];
 
 interface Data {
-  title: string;
   body: Array<Item>;
 }
 interface Item {
-  imgSrc: string;
-  title: string;
-  titleLink: string;
-  artist: Array<string>;
-  artistLink: string;
+  id: string;
+  name: string;
+  coverImgUrl: string;
 }
 
 const MainView = styled.div`
@@ -177,6 +177,8 @@ const H1 = styled.h1`
 `;
 
 const WebPlayerGenre = () => {
+  const { genre } = useParams() as { genre: string };
+
   // 화면 크기에 따라 렌더링하는 item수 설정.
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
@@ -206,13 +208,20 @@ const WebPlayerGenre = () => {
     };
   }, []);
 
+  const [genreData, setGenreData] = useState([]);
+  useLayoutEffect(() => {
+    genreApi(genre).then((res) => {
+      setGenreData(res.data);
+    });
+  }, []);
+
   return (
     <>
       <WebPlayerTopBar />
       <MainView>
         <H1>가요</H1>
-        {GridData.map((data: Data, index: number) => (
-          <Section
+        {genreData.map((data: Data, index: number) => (
+          <GenreSection
             data={data}
             dataNum={dataNum}
             show={true}

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import WebPlayerSearchTopBar from '../components/molecules/WebPlayerSearchTopBar';
-import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
 import { searchListApi } from '../remote.tsx/search';
 
 const SearchData = [
@@ -142,6 +141,12 @@ interface Nav {
   key: number;
   bgColor: string;
 }
+
+interface Data {
+  name: string;
+  color: string;
+  imgUrl: string;
+}
 const MainView = styled.div`
   background-color: #121212;
   display: flex;
@@ -243,22 +248,24 @@ const WebPlayerSearch = () => {
   // 검색 텍스트
   useEffect(() => console.log(text), [text]);
 
-  useEffect(() => {
+  useEffect(() => console.log(searchData), [searchData]);
+  useLayoutEffect(() => {
     searchListApi().then((res) => {
       setSearchData(res.data);
     });
   }, []);
+
   return (
     <>
       <WebPlayerSearchTopBar onChangeHandler={onChangeHandler} />
       <MainView>
         <H2>모두 둘러보기</H2>
         <SearchDiv>
-          {SearchData.map((data, index) => (
-            <NavLink to="../genre" key={index} bgColor={data.bgColor}>
+          {searchData.map((data: Data, index) => (
+            <NavLink to="../genre" key={index} bgColor={data.color}>
               <ItemDiv>
-                <ItemSpan>{data.title}</ItemSpan>
-                <ItemImg src={data.imgSrc} />
+                <ItemSpan>{data.name}</ItemSpan>
+                <ItemImg src={data.imgUrl} />
               </ItemDiv>
             </NavLink>
           ))}
