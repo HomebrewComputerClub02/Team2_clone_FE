@@ -213,4 +213,4 @@ export const TopDivData = {
 
 export const musicId = '0005cf26-ce5f-4b5b-93cd-b5c8d57276ee';
 
-export const BASE_URL = 'http://172.30.1.43:8080';
+export const BASE_URL = 'http://110.34.103.66:25543';

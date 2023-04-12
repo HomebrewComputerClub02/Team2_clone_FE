@@ -28,7 +28,7 @@ export interface LoginProps {
 }
 
 class AuthService {
-  private BASE_URL = `http://172.30.1.43:8080`;
+  private BASE_URL = `http://110.34.103.66:25543`;
   private TOKEN_KEY = 'jwtToken';
   private REFRESH_TOKEN_KEY = 'refreshToken';
   public cookie = new Cookies();
@@ -55,7 +55,7 @@ class AuthService {
   public async login({ email, pw }: LoginProps) {
     axios
       .post(
-        'http://172.30.1.43:8080/auth/login',
+        `${this.BASE_URL}/auth/login`,
         { email, password: pw },
         { withCredentials: true },
       )
@@ -88,9 +88,7 @@ class AuthService {
   public isAuthenticated(): boolean {
     const token = this.getToken();
     if (token) {
-      const decoded: Token = jwt_decode(token);
-      const currentTime = Date.now() / 1000;
-      return decoded.exp > currentTime;
+      return true;
     }
     return false;
   }
