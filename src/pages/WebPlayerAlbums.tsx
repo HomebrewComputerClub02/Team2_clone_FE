@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
+import AlbumSection from '../components/molecules/AlbumSection';
 import Section from '../components/molecules/Section';
-
+import { followAlbumsApi } from '../remote.tsx/collection';
+interface Data {
+  data: Array<Item>;
+  type: string;
+}
+interface Item {
+  albumId: string;
+  albumName: string;
+  singerName: string;
+  singerId: string;
+  imgUrl: string;
+  releaseDate: string;
+}
 const GridData = {
   title: '앨범',
   body: [
@@ -65,7 +78,22 @@ const GridData = {
 };
 
 const WebPlayerAlbums = () => {
-  return <Section data={GridData} dataNum={10} show={false} color={'white'} />;
+  const [albums, setAlbums] = useState<Data | null>(null);
+
+  useLayoutEffect(() => {
+    followAlbumsApi().then((res) => {
+      setAlbums(res.data);
+    });
+  }, []);
+
+  return (
+    <AlbumSection
+      data={albums as Data}
+      dataNum={10}
+      show={false}
+      color={'white'}
+    />
+  );
 };
 
 export default WebPlayerAlbums;
