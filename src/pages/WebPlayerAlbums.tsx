@@ -82,6 +82,8 @@ const WebPlayerAlbums = () => {
 
   useLayoutEffect(() => {
     followAlbumsApi().then((res) => {
+      console.log(res);
+      console.log(res.data);
       setAlbums(res.data);
     });
   }, []);

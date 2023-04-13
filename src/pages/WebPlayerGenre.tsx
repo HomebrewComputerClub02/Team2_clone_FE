@@ -206,8 +206,16 @@ const WebPlayerGenre = () => {
   }, []);
 
   const [genreData, setGenreData] = useState([]);
+
   useLayoutEffect(() => {
     genreApi(genre).then((res) => {
+      res.data
+        .filter((data: any) => data.coverImgUrl == null)
+        .map(
+          (item: any) =>
+            (item.coverImgUrl =
+              'https://i.scdn.co/image/ab67706f000000024ab18459b1f5a2cd93e4f30d'),
+        );
       setGenreData(res.data);
     });
   }, []);
@@ -216,7 +224,7 @@ const WebPlayerGenre = () => {
     <>
       <WebPlayerTopBar />
       <MainView>
-        <H1>가요</H1>
+        <H1>{genre}</H1>
         <GenreSection
           data={genreData}
           dataNum={dataNum}
