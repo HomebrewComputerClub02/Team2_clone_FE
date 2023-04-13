@@ -133,9 +133,6 @@ const GridData = [
 ];
 
 interface Data {
-  body: Array<Item>;
-}
-interface Item {
   id: string;
   name: string;
   coverImgUrl: string;
@@ -220,15 +217,12 @@ const WebPlayerGenre = () => {
       <WebPlayerTopBar />
       <MainView>
         <H1>가요</H1>
-        {genreData.map((data: Data, index: number) => (
-          <GenreSection
-            data={data}
-            dataNum={dataNum}
-            show={true}
-            color={'white'}
-            key={index}
-          />
-        ))}
+        <GenreSection
+          data={genreData}
+          dataNum={dataNum}
+          show={true}
+          color={'white'}
+        />
         <MainViewFooter />
       </MainView>
     </>

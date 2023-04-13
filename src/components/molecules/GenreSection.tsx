@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import AlbumBox from '../atoms/AlbumBox';
 import GenreAlbumBox from '../atoms/GenreAlbumBox';
 
-interface Data {
-  body: Array<Item>;
-}
 interface Item {
   id: string;
   name: string;
@@ -14,7 +11,7 @@ interface Item {
 }
 
 interface Props {
-  data: Data;
+  data: Array<Item>;
   dataNum: number;
   show: boolean;
   color: string;
@@ -94,7 +91,7 @@ const GenreSection = ({ data, dataNum, show, color }: Props) => {
         {show && <ShowAllLink to="section">모두 표시</ShowAllLink>}
       </TitleDiv>
       <GridDiv>
-        {data.body
+        {data
           .filter((item: Item, idx: number) => {
             if (idx < dataNum) return item;
           })

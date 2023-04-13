@@ -122,7 +122,6 @@ export const SubNameLink = styled(Link)`
 `;
 
 export const LayerDiv = styled.div`
-  zindex: -10;
   width: 15px;
   height: 15px;
   background: black;
