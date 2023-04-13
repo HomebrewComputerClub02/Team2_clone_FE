@@ -13,7 +13,6 @@ import {
 } from '../styled';
 import styled from 'styled-components';
 import axios from 'axios';
-import { loginUser } from '../stores/api';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../stores/AuthService';
 const Form = styled.form`

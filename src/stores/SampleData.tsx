@@ -210,3 +210,7 @@ export const TopDivData = {
   playlistName: '내 플레이리스트 #1',
   mainColor: 'rgb(128, 120, 96)',
 };
+
+export const musicId = '0005cf26-ce5f-4b5b-93cd-b5c8d57276ee';
+
+export const BASE_URL = 'http://110.34.103.66:25543';
