@@ -1,136 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import Section from '../components/molecules/Section';
 import MainViewFooter from '../components/molecules/MainViewFooter';
 import WebPlayerTopBar from '../components/molecules/WebPlayerTopBar';
-
-const GridData = [
-  {
-    title: '최근 재생한 항목',
-    body: [
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab67616d00001e02580ac3ad7dfc81e509171120',
-        title: 'BORN PINK',
-        titleLink: '/album',
-        artist: ['BLACKPINK'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab67616d00001e021a8e7c237aca188a1e314af3',
-        title: '4TH WALL',
-        titleLink: '/album',
-        artist: ['Ruel'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab67616d00001e029d28fd01859073a3ae6ea209',
-        title: "NewJeans 1st EP 'New Jeans'",
-        titleLink: '/album',
-        artist: ['NewJeans'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab67706f00000002f36e4a301bc00c44b2c944d9',
-        title: 'Korean OST Instrumentals',
-        titleLink: '/album',
-        artist: ["Enjoy your favourite K-drama's OST instrumentals."],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
-        title: 'IU 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab67616d00001e02278d6cf14513bd97cb580fe7',
-        title: 'VIBE (feat. Jimin of BTS)',
-        titleLink: '/album',
-        artist: ['태양', '지민'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://i.scdn.co/image/ab6761610000f1785704a64f34fe29ff73ab56bb',
-        title: '방탄소년단',
-        titleLink: '/album',
-        artist: ['아티스트'],
-        artistLink: '/artist',
-      },
-    ],
-  },
-  {
-    title: '인기 라디오',
-    body: [
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/6HvZYsbFfjnjFrWF950C9d/en',
-        title: 'NewJeans 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/3HqSLMAZ3g3d5poNaI7GOU/en',
-        title: 'IU 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/6VuMaDnrHyPL1p4EHjYLi7/en',
-        title: 'Charlie Puth 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/6zn0ihyAApAYV51zpXxdEp/en',
-        title: '10cm 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/2SY6OktZyMLdOnscX3DCyS/en',
-        title: 'JANNABI 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-      {
-        imgSrc:
-          'https://seeded-session-images.scdn.co/v1/img/artist/4SpbR6yFEvexJuaBpgAU5p/en',
-        title: 'LE SSERAFIM 라디오',
-        titleLink: '/album',
-        artist: ['만든 사람: Spotify'],
-        artistLink: '/artist',
-      },
-    ],
-  },
-];
+import { homeListApi } from '../remote.tsx/home';
+import HomeSection from '../components/molecules/HomeSection';
 
 interface Data {
-  title: string;
-  body: Array<Item>;
+  type: string;
+  data: Array<Item>;
 }
 interface Item {
-  imgSrc: string;
-  title: string;
-  titleLink: string;
-  artist: Array<string>;
-  artistLink: string;
+  name: string;
+  id: string;
 }
 
 const MainView = styled.div`
@@ -182,6 +64,8 @@ const WebPlayerHome = () => {
     calcWidth();
   };
 
+  const [homeData, setHomeData] = useState([]);
+
   useEffect(() => {
     calcWidth(); //처음에 보여줘야 할 아이템 개수 확인.
     window.addEventListener('resize', handleResize);
@@ -190,19 +74,29 @@ const WebPlayerHome = () => {
     };
   }, []);
 
+  useLayoutEffect(() => {
+    homeListApi().then((res) => {
+      setHomeData(res.data);
+    });
+  }, []);
+
   return (
     <>
       <WebPlayerTopBar />
       <MainView>
-        {GridData.map((data: Data, index: number) => (
-          <Section
-            data={data}
-            dataNum={dataNum}
-            show={true}
-            color={'white'}
-            key={index}
-          />
-        ))}
+        {Object.values(homeData)
+          .filter((val, index) => {
+            if (index != 0) return val;
+          })
+          .map((val: Data, index: number) => (
+            <HomeSection
+              data={val}
+              dataNum={dataNum}
+              show={true}
+              color={'white'}
+              key={index}
+            />
+          ))}
         <MainViewFooter />
       </MainView>
     </>
