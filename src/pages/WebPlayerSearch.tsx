@@ -2,8 +2,11 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MainViewFooter from '../components/molecules/MainViewFooter';
+import SearchAlbumSection from '../components/molecules/SearchAlbumSection';
+import SearchArtistSection from '../components/molecules/SearchArtistSection';
+import SearchMusicSection from '../components/molecules/SearchMusicSection';
 import WebPlayerSearchTopBar from '../components/molecules/WebPlayerSearchTopBar';
-import { searchListApi } from '../remote.tsx/search';
+import { searchAllApi, searchListApi } from '../remote.tsx/search';
 
 interface Nav {
   to: string;
@@ -16,6 +19,27 @@ interface Data {
   color: string;
   imgUrl: string;
 }
+
+interface Item {
+  music_id: string;
+  singers: Array<Singer>;
+  title: string;
+}
+
+interface Album {
+  name: string;
+  id: string;
+}
+
+interface Artist {
+  name: string;
+  id: string;
+}
+interface Singer {
+  id: string;
+  name: string;
+}
+
 const MainView = styled.div`
   background-color: #121212;
   display: flex;
@@ -113,9 +137,20 @@ const WebPlayerSearch = () => {
   };
 
   const [searchData, setSearchData] = useState([]);
+  const [musicData, setMusicData] = useState<Array<Item>>();
+  const [albumData, setAlbumData] = useState<Array<Album>>();
+  const [artistData, setArtistData] = useState<Array<Album>>();
 
   // 검색 텍스트
-  useEffect(() => console.log(text), [text]);
+  useEffect(() => {
+    console.log(text);
+    searchAllApi(text).then((res) => {
+      console.log(res.data);
+      setMusicData(res.data.musicResult.data);
+      setAlbumData(res.data.albumResult.data);
+      setArtistData(res.data.singerResult.data);
+    });
+  }, [text]);
 
   useLayoutEffect(() => {
     searchListApi().then((res) => {
@@ -127,21 +162,35 @@ const WebPlayerSearch = () => {
     <>
       <WebPlayerSearchTopBar onChangeHandler={onChangeHandler} />
       <MainView>
-        <H2>모두 둘러보기</H2>
-        <SearchDiv>
-          {searchData.map((data: Data, index) => (
-            <NavLink
-              to={`../genre/${data.name}`}
-              key={index}
-              bgColor={data.color}
-            >
-              <ItemDiv>
-                <ItemSpan>{data.name}</ItemSpan>
-                <ItemImg src={data.imgUrl} />
-              </ItemDiv>
-            </NavLink>
-          ))}
-        </SearchDiv>
+        {text === '' ? (
+          <>
+            <H2>모두 둘러보기</H2>
+            <SearchDiv>
+              {searchData.map((data: Data, index) => (
+                <NavLink
+                  to={`../genre/${data.name}`}
+                  key={index}
+                  bgColor={data.color}
+                >
+                  <ItemDiv>
+                    <ItemSpan>{data.name}</ItemSpan>
+                    <ItemImg src={data.imgUrl} />
+                  </ItemDiv>
+                </NavLink>
+              ))}
+            </SearchDiv>
+          </>
+        ) : (
+          <>
+            <SearchMusicSection data={musicData as Array<Item>} dataNum={6} />
+            <SearchAlbumSection data={albumData as Array<Album>} dataNum={6} />
+            <SearchArtistSection
+              data={artistData as Array<Artist>}
+              dataNum={6}
+            />
+          </>
+        )}
+
         <MainViewFooter />
       </MainView>
     </>
