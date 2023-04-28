@@ -85,7 +85,7 @@ const LikeBottomDiv = ({ data }: props) => {
       <FlexDiv>
         {data.map((value, index) => (
           <div onClick={submitGlobalTracks} key={index}>
-            <Song data={value} index={index} />
+            <Song data={value} index={index} onclick={submitGlobalTracks} />
           </div>
         ))}
       </FlexDiv>
