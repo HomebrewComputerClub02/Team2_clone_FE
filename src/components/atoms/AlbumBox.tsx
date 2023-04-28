@@ -177,12 +177,10 @@ const AlbumBox = ({ item }: Props) => {
         <NameP>{item.title}</NameP>
         <SubNameDiv>
           {item.artist.map((value, index) => (
-            <>
+            <div key={index}>
               {index > 0 ? <pre>, </pre> : null}
-              <SubNameLink to="artist" key={index}>
-                {value}
-              </SubNameLink>
-            </>
+              <SubNameLink to="artist">{value}</SubNameLink>
+            </div>
           ))}
         </SubNameDiv>
       </TextDiv>

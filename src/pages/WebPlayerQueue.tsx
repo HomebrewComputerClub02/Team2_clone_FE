@@ -19,11 +19,17 @@ import Song, {
   LikeDiv,
   ItemSpan,
 } from '../components/molecules/Song';
+import { useRecoilState } from 'recoil';
+import { GlobalTracks } from '../stores/atom';
 
 interface WebPlayerQueueProps {
   data: Track[];
 }
 function WebPlayerQueue({ data }: WebPlayerQueueProps) {
+  const [globalTrack, setGlobalTrack] = useRecoilState(GlobalTracks);
+  const onSubmitTrack = () => {
+    setGlobalTrack(data);
+  };
   return (
     <MainView>
       <Section>
@@ -31,11 +37,21 @@ function WebPlayerQueue({ data }: WebPlayerQueueProps) {
         <h3>Now playing</h3>
         <FlexDiv>
           {data.slice(0, 1).map((value, index) => (
-            <Song data={value} index={index} key={index} />
+            <Song
+              data={value}
+              index={index}
+              key={index}
+              onclick={onSubmitTrack}
+            />
           ))}
           <h3>Next from:</h3>
           {data.slice(1).map((value, index) => (
-            <Song data={value} index={index} key={index} />
+            <Song
+              data={value}
+              index={index}
+              key={index}
+              onclick={onSubmitTrack}
+            />
           ))}
         </FlexDiv>
       </Section>

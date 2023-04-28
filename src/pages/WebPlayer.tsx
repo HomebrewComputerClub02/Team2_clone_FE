@@ -18,10 +18,10 @@ const Layout = styled.div`
     'nav-bar top-bar'
     'nav-bar main-view'
     'now-playing-bar now-playing-bar';
+  background: #181818;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 593px auto;
-  height: 100%;
-  min-height: 100%;
+  grid-template-rows: 10% 80% 10%;
+  height: 100vh;
   position: relative;
   width: 100%;
   overflow: hidden; // 스크롤바 삭제.
