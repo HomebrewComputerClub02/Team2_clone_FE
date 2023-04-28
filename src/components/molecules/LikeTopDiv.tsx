@@ -2,13 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface Data {
-  imgSrc: string;
-  playlistName: string;
-}
-
 interface Props {
-  data: Data;
   num: number;
 }
 
@@ -81,17 +75,19 @@ const UserLink = styled(Link)`
   }
 `;
 
-const LikeTopDiv = ({ data, num }: Props) => {
+const LikeTopDiv = ({ num }: Props) => {
   return (
     <TopDiv>
       <VioletDiv></VioletDiv>
       <GradDiv></GradDiv>
       <ImgDiv>
-        <Img src={data.imgSrc} />
+        <Img
+          src={'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'}
+        />
       </ImgDiv>
       <TextDiv>
         <FirstText>플레이리스트</FirstText>
-        <SecondText>{data.playlistName}</SecondText>
+        <SecondText>좋아요 표시한 곡</SecondText>
         <TextBottomDiv>
           <UserLink to="/open/collection/artists">배지호</UserLink>
           <FirstText>{num}곡</FirstText>
