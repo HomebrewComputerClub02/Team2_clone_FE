@@ -120,8 +120,9 @@ export const PlayButton = styled.button`
 interface SongProps {
   index: number;
   data: Track;
+  onclick: any;
 }
-function Song({ index, data }: SongProps) {
+function Song({ index, data, onclick }: SongProps) {
   const [trackIndex, setTrackIndex] = useRecoilState(GlobalTracksIndex);
   const [globalPlay, setGlobalPlay] = useRecoilState(GlobalPlay);
   const [isLiked, setIsLiked] = useState<boolean>();
@@ -141,6 +142,7 @@ function Song({ index, data }: SongProps) {
   const onGlobalPlay = () => {
     setTrackIndex(index);
     setGlobalPlay((prev) => !prev);
+    onclick();
   };
   return (
     <ItemDiv key={index} onClick={onGlobalPlay}>

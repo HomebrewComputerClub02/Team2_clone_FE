@@ -1,7 +1,4 @@
-import { Cookie } from '@mui/icons-material';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
-import { Cookies } from 'react-cookie';
 interface User {
   username: string;
   email: string;
@@ -31,7 +28,6 @@ class AuthService {
   private BASE_URL = `http://110.34.103.66:25543`;
   private TOKEN_KEY = 'jwtToken';
   private REFRESH_TOKEN_KEY = 'refreshToken';
-  public cookie = new Cookies();
   public async signup({
     email,
     pw,
@@ -61,11 +57,6 @@ class AuthService {
       )
       .then((res: any) => {
         //리프레시 토큰을 쿠키에 담아두긴 했는데 어떻게 쓰는 지 모르겠음
-        console.log('cookie : ', this.cookie.get('RefreshToken'));
-        console.log(res.headers.get('Authorization'));
-        console.log(res.headers.get('Refresh'));
-        //let [cookie] = res.headers["set-cookie"];
-        //console.log(cookie);
         localStorage.clear();
         const accessJwt = res.headers.get('Authorization');
         const refreshJwt = res.headers.get('Refresh');

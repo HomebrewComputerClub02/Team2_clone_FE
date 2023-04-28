@@ -67,7 +67,6 @@ const PlaylistMidDiv = ({ type, data, mainColor }: PlayListMidDivProps) => {
       setIsLiked(false);
     }
   };
-  console.log('isPlaying', isplaying);
   return (
     <MidDiv bg={mainColor}>
       <ButtonDiv>

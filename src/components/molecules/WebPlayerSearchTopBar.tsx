@@ -83,7 +83,6 @@ const Input = styled.input`
 function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
   const inputRef = useRef<any>();
   const SearchMusicAPI = async (keyword: string) => {
-    console.log(localStorage.getItem('jwtToken'));
     axios
       .get(`${BASE_URL}/searchMusic/${keyword}`, {
         headers: {
@@ -96,12 +95,9 @@ function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
       })
       .catch((e) => {
         console.log(e);
-        console.log(e.message);
-        console.log(e.code);
       });
   };
   const SearchAllAPI = async (keyword: string) => {
-    console.log(localStorage.getItem('jwtToken'));
     axios
       .get(`${BASE_URL}/searchAll/${keyword}`, {
         headers: {
@@ -114,8 +110,6 @@ function WebPlayerSearchTopBar({ onChangeHandler }: Props) {
       })
       .catch((e) => {
         console.log(e);
-        console.log(e.message);
-        console.log(e.code);
       });
   };
   const SearchAlbumAPI = async (keyword: string) => {

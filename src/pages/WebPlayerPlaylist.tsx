@@ -114,9 +114,9 @@ const WebPlayerPlaylist = () => {
       <WebPlayerTopBar />
       <MainView>
         <Section>
-          <PlaylistTopDiv data={TopDivData} playlistData={PlaylistData} />
+          <PlaylistTopDiv data={TopDivData} playlistData={Tracks} />
           <PlaylistMidDiv data={Tracks} mainColor={TopDivData.mainColor} />
-          <PlaylistBottomDiv data={PlaylistData} />
+          <PlaylistBottomDiv data={Tracks} />
         </Section>
         <MainViewFooter />
       </MainView>

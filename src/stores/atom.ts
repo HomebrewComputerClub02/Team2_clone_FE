@@ -22,7 +22,7 @@ export const GlobalTracks = atom({
       album: '4 ONLY',
       update: '6일 전',
       time: 240,
-      musicLink: '/mp3/dontcry.mp3',
+      musicLink: '/mp3/sweet_child_o_mine.mp3',
       artistLink: '',
       albumLink: '',
     },
