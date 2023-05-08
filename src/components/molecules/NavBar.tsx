@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeIcon from '@mui/icons-material/Home';
@@ -7,6 +7,7 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { getUserPlaylistApi, makePlaylistApi } from '../../remote.tsx/playlist';
 const Nav = styled.div`
   min-width: 170px;
   background-color: #000;
@@ -56,6 +57,7 @@ const NavButton = styled.button`
   color: #fff;
   border: none;
   padding: 0px;
+  cursor: pointer;
 `;
 const HrDiv = styled.div`
   margin-top: 10px;
@@ -68,6 +70,13 @@ const Hr = styled.hr`
   background-color: #282828;
 `;
 const NavBar = () => {
+  const [playlistData, setPlaylistData] = useState([]);
+  useLayoutEffect(() => {
+    getUserPlaylistApi().then((res) => {
+      setPlaylistData(res.data);
+    });
+  }, []);
+
   return (
     <Nav>
       <NavUl>
@@ -92,7 +101,7 @@ const NavBar = () => {
       </NavUl>
       <NavDiv>
         <NavInnerDiv>
-          <NavButton>
+          <NavButton onClick={() => makePlaylistApi()}>
             <LibraryAddIcon />
             <NavSpan>플레이리스트 만들기</NavSpan>
           </NavButton>

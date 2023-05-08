@@ -172,6 +172,9 @@ const SearchArtistBox = ({ item }: Props) => {
       </ImgDiv>
       <TextDiv>
         <NameP>{item.name}</NameP>
+        <SubNameDiv>
+          <SubNameLink to="artist">아티스트</SubNameLink>
+        </SubNameDiv>
       </TextDiv>
     </ItemDiv>
   );
