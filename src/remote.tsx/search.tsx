@@ -21,3 +21,47 @@ export async function genreApi(name: string) {
     withCredentials: true,
   });
 }
+
+export async function searchAllApi(name: string) {
+  return await client.get(`/searchAll/${name}`, {
+    headers: {
+      Authorization: localStorage.getItem('jwtToken'),
+      'Access-Control-Allow-Origin': 'http://192.168.200.150:3000',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+    withCredentials: true,
+  });
+}
+
+export async function searchMusicApi(name: string) {
+  return await client.get(`/searchMusic/${name}`, {
+    headers: {
+      Authorization: localStorage.getItem('jwtToken'),
+      'Access-Control-Allow-Origin': 'http://192.168.200.150:3000',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+    withCredentials: true,
+  });
+}
+
+export async function searchAlbumApi(name: string) {
+  return await client.get(`/searchAlbum/${name}`, {
+    headers: {
+      Authorization: localStorage.getItem('jwtToken'),
+      'Access-Control-Allow-Origin': 'http://192.168.200.150:3000',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+    withCredentials: true,
+  });
+}
+
+export async function searchArtistApi(name: string) {
+  return await client.get(`/searchArtist/${name}`, {
+    headers: {
+      Authorization: localStorage.getItem('jwtToken'),
+      'Access-Control-Allow-Origin': 'http://192.168.200.150:3000',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+    withCredentials: true,
+  });
+}
